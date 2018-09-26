@@ -3,6 +3,23 @@ from django.urls import reverse
 from django.db import models
 
 
+class Organization(models.Model):
+    """
+    External group or organization of which user is a member.
+    """
+
+    name = models.CharField(
+        max_length=128
+    )
+    org_link = models.URLField(
+        blank=True,
+        help_text="Used to link back to the organization's homepage (or to any URL)."
+    )
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class User(AbstractUser):
     '''
     Inherits all native User fields from Django auth.User model and allows adding custom fields
@@ -10,12 +27,10 @@ class User(AbstractUser):
     https://docs.djangoproject.com/en/2.0/ref/contrib/auth/#user-model
     '''
 
-    organization = models.CharField(
-        max_length=32,
-        null=True,
-        blank=True,
-        choices=[],
-        help_text="Affilation",)
+    organizations = models.ManyToManyField(
+        Organization,
+        help_text="Groups or organizations of which this user is a member.",
+        blank=True)
 
     class Meta:
         app_label = 'users'
