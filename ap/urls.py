@@ -18,5 +18,3 @@ urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
 
 ]
-
-

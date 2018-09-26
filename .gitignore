@@ -75,7 +75,5 @@ staticfiles/
 local.py
 .cache/
 
-iris.egg-info/
-
 webpack-stats.json
 
