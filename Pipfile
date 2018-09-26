@@ -12,6 +12,7 @@ django-environ = "*"
 "psycopg2-binary" = "*"
 pylint = "*"
 black = "==18.6b4"
+rules = "*"
 
 [dev-packages]
 "flake8" = "*"
