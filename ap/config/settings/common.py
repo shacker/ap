@@ -49,7 +49,10 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = ["django_extensions", "compressor", "allauth", "allauth.account"]
 
 
-LOCAL_APPS = ["ap.apps.users"]
+LOCAL_APPS = [
+    "ap.apps.events",
+    "ap.apps.users",
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
