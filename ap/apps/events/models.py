@@ -75,6 +75,24 @@ class Event(TimeStampedModel):
         help_text="An organization registered on athlete.photo representing the overall host for this event."
     )
 
+    fee = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        default=0,
+        help_text="Platform fee paid by Event organizer to athlete.photo"
+    )
+
+    fee_paid = models.BooleanField(
+        default=False,
+        help_text="Event fee has been paid in full"
+    )
+
+    notes = models.TextField(
+        'Internal Notes',
+        blank=True,
+        help_text="Internal/private notes regarding the event. For use by athlete.photo only."
+    )
+
     class Meta:
         """Meta definition for Event."""
 
