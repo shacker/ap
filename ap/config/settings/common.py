@@ -53,6 +53,7 @@ LOCAL_APPS = [
     "ap.apps.events",
     "ap.apps.users",
     "ap.apps.orgs",
+    "ap.apps.photos",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
