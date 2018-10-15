@@ -46,7 +46,17 @@ DJANGO_APPS = [
     "django.contrib.admin",
 ]
 
-THIRD_PARTY_APPS = ["django_extensions", "compressor", "allauth", "allauth.account"]
+THIRD_PARTY_APPS = [
+    "django_extensions",
+    "compressor",
+
+    # Local or social logins
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
+]
 
 
 LOCAL_APPS = [
@@ -181,8 +191,9 @@ AUTHENTICATION_BACKENDS = [
 
 # Custom user app defaults
 AUTH_USER_MODEL = "users.User"
-LOGIN_REDIRECT_URL = "ap:home"
-LOGIN_URL = "ap:home"
+LOGIN_REDIRECT_URL = "home"
+LOGIN_URL = "account_login"
+# SOCIALACCOUNT_AUTO_SIGNUP = False  # Don't auto-create usernames - make them pick one
 
 # Allauth user/registration/signup/password/reset defaults. See:
 # http://django-allauth.readthedocs.io/en/latest/configuration.html

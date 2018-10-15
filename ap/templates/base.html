@@ -28,6 +28,29 @@
   </head>
 
   <body>
+    {# Facebook SDK for social logins #}
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '586231325127969',
+            cookie     : true,
+            xfbml      : true,
+            version    : '3.1'
+          });
+
+          FB.AppEvents.logPageView();
+
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+      </script>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-sm bg-light static-top">
       <div class="container">
@@ -43,7 +66,13 @@
                 <a class="nav-link" href="#">Link 3</a>
               </li>
             </ul>
-        <a class="btn btn-primary" href="#">Sign In</a>
+
+        {% if user.is_authenticated %}
+          <a class="btn btn-primary" href="{% url 'account_logout' %}">Log Out</a>
+        {% else %}
+          <a class="btn btn-primary" href="{% url 'account_login' %}">Sign In</a>
+        {% endif %}
+
       </div>
     </nav>
 
@@ -72,6 +101,11 @@
     </header>
 
     <!-- Icons Grid -->
+
+    {% block content %}
+
+    {% endblock content %}
+
     <section class="features-icons bg-light text-center">
       <div class="container">
         <div class="row">
