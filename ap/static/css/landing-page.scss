@@ -41,6 +41,12 @@ header.masthead h1 {
   font-size: 2rem;
 }
 
+header.masthead.faqs {
+  background: url("../img/bg-faqs.jpg") no-repeat center center;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
 @media (min-width: 768px) {
   header.masthead {
     padding-top: 12rem;

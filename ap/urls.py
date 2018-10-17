@@ -3,7 +3,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path
 
-from ap import views
+from ap.apps.core import views as coreviews
 
 app_name = 'ap'
 
@@ -11,8 +11,20 @@ urlpatterns = [
 
     path(
         '',
-        views.home,
+        coreviews.home,
         name="home"),
+
+    path(
+        'faqs/<str:section_title>/',
+        coreviews.faqs_section,
+        name="faqs_section"),
+
+    path(
+        'faqs/',
+        coreviews.faqs_index,
+        name="faqs_index"),
+
+
 
     path('accounts/', include('allauth.urls')),
     url(settings.ADMIN_URL, admin.site.urls),
