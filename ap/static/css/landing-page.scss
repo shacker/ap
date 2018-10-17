@@ -131,3 +131,12 @@ footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+
+// Remove color/underline of links on FAQ section links FIXME: Make more specific?
+a:hover {
+  text-decoration: none;
+}
+
+a h3, a p {
+  color: black;
+}
