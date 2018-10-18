@@ -20,12 +20,15 @@
 
         <ul class="socialaccount_providers">
           {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+          <li>
+            <a href="{{ signup_url }}">Use the signup form</a> if you prefer a traditional username and password
+          </li>
         </ul>
 
       </div>
 
       <p>
-        ... or sign in below (<a href="{{ signup_url }}">sign up</a> if you don't already have an account):
+        ... or sign in below ...
       </p>
 
       {% include "socialaccount/snippets/login_extra.html" %}
