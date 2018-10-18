@@ -47,6 +47,12 @@ header.masthead.faqs {
   padding-bottom: 6rem;
 }
 
+header.masthead.about {
+  background: url("../img/bg-about.jpg") no-repeat center center;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
 @media (min-width: 768px) {
   header.masthead {
     padding-top: 12rem;

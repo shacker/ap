@@ -24,6 +24,10 @@ urlpatterns = [
         coreviews.faqs_index,
         name="faqs_index"),
 
+    path(
+        'about/',
+        coreviews.about,
+        name="about"),
 
 
     path('accounts/', include('allauth.urls')),

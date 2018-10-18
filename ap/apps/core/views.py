@@ -25,3 +25,10 @@ def faqs_section(request, section_title: str) -> HttpResponse:
     }
 
     return render(request, "core/faqs_section.html", context=ctx)
+
+
+def about(request) -> HttpResponse:
+    """About this site
+    """
+
+    return render(request, "core/about.html")
