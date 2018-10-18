@@ -6,6 +6,7 @@ from ap.apps.users.models import Organization, User
 
 class UserAdmin(admin.ModelAdmin):
     filter_horizontal = ['organizations', ]
+    search_fields = ['username', 'first_name', 'last_name', ]
 
 
 admin.site.register(Organization)
