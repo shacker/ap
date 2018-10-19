@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block page_title %}Contact Us{% endblock page_title %}
+
+{% block content %}
+  <div class="container">
+
+    <h1>Contact Us</h1>
+
+    <p>We'd love to hear from you.</p>
+
+    <form class="contact" id="contact" method="post" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <button class="btn btn-primary" type="submit">Submit &raquo;</button>
+
+    </form>
+
+  </div>
+
+{% endblock %}

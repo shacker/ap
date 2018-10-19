@@ -31,5 +31,6 @@ urlpatterns = [
 
 
     path('accounts/', include('allauth.urls')),
+    path('contact/', include('ap.apps.contact.urls')),
     url(settings.ADMIN_URL, admin.site.urls),
 ]
