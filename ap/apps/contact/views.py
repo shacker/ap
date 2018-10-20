@@ -1,3 +1,5 @@
+import bleach
+
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.conf import settings
@@ -14,9 +16,9 @@ def contact(request):
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = form.cleaned_data['subject']
             from_email = form.cleaned_data['from_email']
-            message = form.cleaned_data['message']
+            subject = bleach.clean(form.cleaned_data['subject'], strip=True)
+            message = bleach.clean(form.cleaned_data['message'], strip=True)
 
             try:
                 send_mail(subject, message, from_email, settings.ADMINS)
