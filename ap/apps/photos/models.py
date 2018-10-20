@@ -39,20 +39,13 @@ class Photo(TimeStampedModel):
         blank=True
     )
 
-    subject = models.ForeignKey(
-        User,
-        null=True,
+    subjects = models.ManyToManyField(
+        "users.User",
         blank=True,
-        on_delete=models.CASCADE,
-        help_text="Primary subject of photo"
+        help_text="Participants visible in this photo."
     )
 
     def __str__(self):
         """Unicode representation of a Photo."""
 
-        subject = "Unknown"
-
-        if self.subject:
-            subject = self.subject.get_full_name()
-
-        return f"{subject} - {self.timestamp}"
+        return f"{self.event.slug} - {self.id}"
