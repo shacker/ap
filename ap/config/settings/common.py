@@ -50,13 +50,14 @@ THIRD_PARTY_APPS = [
     "django_extensions",
     "compressor",
     "captcha",
+    "crispy_forms",
 
     # Local or social logins
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.twitter',
+    "allauth.socialaccount.providers.facebook",
+    "allauth.socialaccount.providers.twitter",
 ]
 
 
@@ -121,7 +122,10 @@ TEMPLATES = [
             "debug": DEBUG,
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
             # https://docs.djangoproject.com/en/dev/ref/templates/api/#loader-types
-            "loaders": ["django.template.loaders.filesystem.Loader", "django.template.loaders.app_directories.Loader"],
+            'loaders': [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+            ],
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -163,9 +167,7 @@ MEDIA_URL = "/media/"
 # *.scss files linked with MIME type text/x-scss will be compiled to css by django-compressor
 # React modules delivered with MIME type text/jsx will be compiled to webpack by django-compressor
 SASS_COMMAND = "sassc {infile} {outfile}"
-COMPRESS_PRECOMPILERS = (
-    ("text/x-scss", SASS_COMMAND),
-)
+COMPRESS_PRECOMPILERS = (("text/x-scss", SASS_COMMAND),)
 # COMPRESS_OFFLINE = True
 
 

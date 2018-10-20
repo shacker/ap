@@ -1,6 +1,12 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block page_title %}Contact Us{% endblock page_title %}
+
+{% block extra_head %}
+    {# Google recaptcha #}
+    <script src='https://www.google.com/recaptcha/api.js?render=6LeL93UUAAAAAJTJyBZKtQ45-5z_1d1FKF4kDDjh'></script>
+{% endblock extra_head %}
 
 {% block content %}
   <div class="container">
@@ -9,13 +15,7 @@
 
     <p>We'd love to hear from you.</p>
 
-    <form class="contact" id="contact" method="post" action="">
-      {% csrf_token %}
-      {{ form.as_p }}
-
-      <button class="btn btn-primary" type="submit">Submit &raquo;</button>
-
-    </form>
+    {% crispy form %}
 
   </div>
 

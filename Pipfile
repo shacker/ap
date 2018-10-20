@@ -15,6 +15,7 @@ black = "==18.6b4"
 rules = "*"
 libsass = "*"
 django-recaptcha = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 "flake8" = "*"

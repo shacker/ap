@@ -25,29 +25,8 @@
     {# Google fonts must be outside of compressor #}
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-    {# Google recaptcha #}
-    <script src='https://www.google.com/recaptcha/api.js?render=6LeL93UUAAAAAJTJyBZKtQ45-5z_1d1FKF4kDDjh'></script>
-
-    {# Facebook SDK for social logins #}
-    <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '586231325127969',
-            cookie     : true,
-            xfbml      : true,
-            version    : '3.1'
-          });
-          FB.AppEvents.logPageView();
-        };
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));
-      </script>
+    {% block extra_head %}
+    {% endblock extra_head %}
 
   </head>
 
