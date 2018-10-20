@@ -15,22 +15,13 @@ urlpatterns = [
         name="home"),
 
     path(
-        'faqs/<str:section_title>/',
-        coreviews.faqs_section,
-        name="faqs_section"),
-
-    path(
-        'faqs/',
-        coreviews.faqs_index,
-        name="faqs_index"),
-
-    path(
         'about/',
         coreviews.about,
         name="about"),
 
 
     path('accounts/', include('allauth.urls')),
+    path('faqs/', include('ap.apps.faqs.urls')),
     path('contact/', include('ap.apps.contact.urls')),
     url(settings.ADMIN_URL, admin.site.urls),
 ]
