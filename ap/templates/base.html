@@ -25,9 +25,9 @@
     {# Google fonts must be outside of compressor #}
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-  </head>
+    {# Google recaptcha #}
+    <script src='https://www.google.com/recaptcha/api.js?render=6LeL93UUAAAAAJTJyBZKtQ45-5z_1d1FKF4kDDjh'></script>
 
-  <body>
     {# Facebook SDK for social logins #}
     <script>
         window.fbAsyncInit = function() {
@@ -37,9 +37,7 @@
             xfbml      : true,
             version    : '3.1'
           });
-
           FB.AppEvents.logPageView();
-
         };
 
         (function(d, s, id){
@@ -50,6 +48,10 @@
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));
       </script>
+
+  </head>
+
+  <body>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-sm bg-light static-top">
@@ -86,7 +88,7 @@
 
 
     <!-- Footer -->
-    <footer class="footer bg-light fixed-bottom">
+    <footer class="footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 h-100 text-center text-lg-left my-auto">

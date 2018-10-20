@@ -49,6 +49,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "django_extensions",
     "compressor",
+    "captcha",
 
     # Local or social logins
     "allauth",
@@ -104,6 +105,9 @@ USE_L10N = False  # we're not using it *and* don't have locale middleware above.
 LOCALE_PATHS = (str(ROOT_DIR) + "/locale",)
 
 CSRF_USE_SESSIONS = False
+
+# Use the mouse-based recaptcha from Google (django-recaptcha)
+NOCAPTCHA = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#templates
 TEMPLATES = [
