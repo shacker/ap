@@ -110,6 +110,9 @@ CSRF_USE_SESSIONS = False
 # Use the mouse-based recaptcha from Google (django-recaptcha)
 NOCAPTCHA = True
 
+# Default template pack for CrispyForms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#templates
 TEMPLATES = [
     {
