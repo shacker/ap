@@ -19,14 +19,12 @@
       <link href="{% static 'node_modules/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
       <link href="{% static 'node_modules/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
       <link href="{% static 'scss/style.scss' %}" type="text/x-scss" rel="stylesheet" charset="utf-8"/>
-      <link href="{% static 'css/landing-page.scss' %}" type="text/x-scss" rel="stylesheet" charset="utf-8" />
     {% endcompress %}
 
     {# Google fonts must be outside of compressor #}
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-    {% block extra_head %}
-    {% endblock extra_head %}
+    {% block extra_head %}{% endblock extra_head %}
 
   </head>
 
@@ -121,6 +119,8 @@
     <!-- Le Javascript -->
     <script src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+    {% block extra_foot %}{% endblock extra_foot %}
 
   </body>
 
