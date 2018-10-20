@@ -3,6 +3,7 @@ import bleach
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.conf import settings
+from django.contrib import messages
 from django.shortcuts import render, redirect, reverse
 
 from .forms import ContactForm
@@ -22,6 +23,7 @@ def contact(request):
 
             try:
                 send_mail(subject, message, from_email, settings.ADMINS)
+                messages.success(request, "Message sent successfully")
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect(reverse('contact:success'))
