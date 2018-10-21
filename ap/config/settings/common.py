@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = [
     "compressor",
     "captcha",
     "crispy_forms",
+    "sorl.thumbnail",
 
     # Local or social logins
     "allauth",

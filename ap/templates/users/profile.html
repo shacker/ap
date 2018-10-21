@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
+
 
 {% block page_title %}Participants{% endblock page_title %}
 
@@ -27,7 +29,9 @@
 
                 {% if user.avatar %}
                     <p>
-                        {{ user.avatar }}
+                        {% thumbnail user.avatar.file "300x300" crop="center" as im %}
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                        {% endthumbnail %}
                     </p>
                 {% endif %}
 

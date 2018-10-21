@@ -18,6 +18,7 @@ django-recaptcha = "*"
 django-crispy-forms = "*"
 bleach = "*"
 pillow = "*"
+sorl-thumbnail = "*"
 
 [dev-packages]
 "flake8" = "*"
