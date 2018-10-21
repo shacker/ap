@@ -25,12 +25,153 @@
                     {{ user.get_full_name }} ({{user.username}})
                 </h1>
 
-                <p>
-                    My deets
-                </p>
+                {% if user.avatar %}
+                    <p>
+                        {{ user.avatar }}
+                    </p>
+                {% endif %}
+
+                {% if user.about %}
+                    <div class="profile_label">
+                        About {{ user.username }}
+                    </div>
+                    <p>
+                        {{ user.about|safe }}
+                    </p>
+                {% endif %}
+
+                {% if user.personal_website %}
+                    <div class="profile_label">
+                        Personal Website
+                    </div>
+                    <p>
+                        <a href="{{ user.personal_website }}">{{ user.personal_website }}</a>
+                    </p>
+                {% endif %}
+
+                {% if user.professional_website %}
+                    <div class="profile_label">
+                        Professional Website
+                    </div>
+                    <p>
+                        <a href="{{ user.professional_website }}">{{ user.professional_website }}</a>
+                    </p>
+                {% endif %}
+
+                {% if user.facebook %}
+                    <div class="profile_label">
+                        Facebook
+                    </div>
+                    <p>
+                        <a href="https://facebook.com/{{ user.facebook }}">{{ user.facebook }}</a>
+                    </p>
+                {% endif %}
+
+                {% if user.twitter %}
+                    <div class="profile_label">
+                        Twitter
+                    </div>
+                    <p>
+                        <a href="https://twitter.com/{{ user.twitter }}">{{ user.twitter }}</a>
+                    </p>
+                {% endif %}
+
+                {% if user.linkedin %}
+                    <div class="profile_label">
+                        LinkedIn
+                    </div>
+                    <p>
+                        <a href="https://www.linkedin.com/in/{{ user.linkedin }}/">{{ user.linkedin }}</a>
+                    </p>
+                {% endif %}
+
+                {% if user.ap_organizations %}
+                    <div class="profile_label">
+                        Organizations
+                    </div>
+                    <ul>
+                        {% for org in user.ap_organizations.all  %}
+                            <li>
+                                {{org}} (link when we have org deet page)
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+
+                {% if user.photo_set.all %}
+                    <div class="profile_label">
+                        Event photos
+                    </div>
+                    <ul>
+                        {% for photo in user.photo_set.all  %}
+                            <li>
+                                {{photo}}
+                                {{ photo.file.url }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
 
             </div>
         </div>
     </div>
 
 {% endblock content %}
+
+
+    about = models.TextField(
+        help_text="Your bio / about you.",
+        blank=True
+    )
+
+    avatar = models.ImageField(
+        blank=True,
+        null=True,
+        upload_to=get_avatar_upload_dir,
+        help_text="An image of you, to be used with your profile."
+    )
+
+    email = models.EmailField(
+        max_length=254,
+        blank=True
+    )
+
+    personal_website = models.URLField(
+        max_length=200,
+        blank=True,
+        help_text="Your blog, profile, or hobby website or page URL."
+    )
+
+    professional_website = models.URLField(
+        max_length=200,
+        blank=True,
+        help_text="Your work-related website or profile page URL."
+    )
+
+    facebook = models.CharField(
+        blank=True,
+        max_length=100,
+        help_text="Your Facebook username (not URL)."
+    )
+
+    twitter = models.CharField(
+        blank=True,
+        max_length=100,
+        help_text="Your Twitter username (not URL)."
+    )
+
+    linkedin = models.CharField(
+        blank=True,
+        max_length=100,
+        verbose_name="LinkedIn",
+        help_text="Your LinkedIn username (not URL)."
+    )
+
+    ap_organizations = models.ManyToManyField(
+        Organization,
+        blank=True,
+        verbose_name="AP Orgs",
+        help_text="Groups or organizations registered on athlete.photo, of which this user is a member.",
+    )

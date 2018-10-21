@@ -49,7 +49,8 @@ class User(AbstractUser):
 
     email = models.EmailField(
         max_length=254,
-        blank=True
+        blank=True,
+        help_text="We will never display your email on the website."
     )
 
     personal_website = models.URLField(
