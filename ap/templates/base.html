@@ -44,9 +44,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'users:list' %}">Athletes</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link 3</a>
-              </li>
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users:profile' user.username %}">My photos</a>
+                </li>
+              {% endif %}
             </ul>
 
         {% if user.is_authenticated %}

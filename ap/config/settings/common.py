@@ -205,12 +205,14 @@ AUTHENTICATION_BACKENDS = [
 AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = "home"
 LOGIN_URL = "account_login"
-# SOCIALACCOUNT_AUTO_SIGNUP = False  # Don't auto-create usernames - make them pick one
+
 
 # Allauth user/registration/signup/password/reset defaults. See:
 # http://django-allauth.readthedocs.io/en/latest/configuration.html
-# ACCOUNT_AUTHENTICATION_METHOD = "username"
-# ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+ACCOUNT_EMAIL_REQUIRED = True  #  All signups require an email, even for social logins
+ACCOUNT_EMAIL_VERIFICATION = True  # Users must verify email addresses
+SOCIALACCOUNT_AUTO_SIGNUP = False  # Don't auto-create usernames - make them pick one
+
 
 # AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
 

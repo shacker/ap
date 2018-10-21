@@ -91,6 +91,11 @@ class User(AbstractUser):
         help_text="Groups or organizations registered on athlete.photo, of which this user is a member.",
     )
 
+    profile_edited = models.BooleanField(
+        default=False,
+        help_text="Alert user if they have never set up their profile"
+    )
+
     class Meta:
         app_label = 'users'
 

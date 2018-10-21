@@ -17,5 +17,5 @@ def profile(request: HttpRequest, username: str) -> HttpResponse:
     """
     User detail/profile
     """
-    user = get_object_or_404(User, username=username)
-    return render(request, 'users/profile.html', {'user': user}, )
+    profile = get_object_or_404(User, username=username)
+    return render(request, 'users/profile.html', {'profile': profile}, )

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
-
+{% load staticfiles %}
 
 {% block page_title %}Participants{% endblock page_title %}
 
@@ -24,77 +24,94 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="mt-4">
-                    {{ user.get_full_name }} ({{user.username}})
+                    {{ profile.get_full_name }} ({{profile.username}})
                 </h1>
 
-                {% if user.avatar %}
+                {% if profile.avatar %}
                     <p>
-                        {% thumbnail user.avatar.file "300x300" crop="center" as im %}
-                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                        {% thumbnail profile.avatar.file "300x300" crop="center" as im %}
+                            <img
+                                src="{{ im.url }}"
+                                width="{{ im.width }}" height="{{ im.height }}"
+                                alt="{{profile.username}}'s profile image"
+                            />
                         {% endthumbnail %}
                     </p>
+                {% else %}
+                    <img
+                        src="{% static 'img/default_profile_200x200.png' %}"
+                        width="200" height="200"
+                        alt="Default profile image"
+                    />
                 {% endif %}
 
-                {% if user.about %}
+                {% if user == profile and not profile.profile_edited %}
+                    <div class="messages alert alert-warning mt-4">
+                        You have not yet set up your profile. Click EDIT to optionally update your
+                        bio, profile image, social links and more (all optional).
+                    </div>
+                {% endif %}
+
+                {% if profile.about %}
                     <div class="profile_label">
-                        About {{ user.username }}
+                        About {{ profile.username }}
                     </div>
                     <p>
-                        {{ user.about|safe }}
+                        {{ profile.about|safe }}
                     </p>
                 {% endif %}
 
-                {% if user.personal_website %}
+                {% if profile.personal_website %}
                     <div class="profile_label">
                         Personal Website
                     </div>
                     <p>
-                        <a href="{{ user.personal_website }}">{{ user.personal_website }}</a>
+                        <a href="{{ profile.personal_website }}">{{ profile.personal_website }}</a>
                     </p>
                 {% endif %}
 
-                {% if user.professional_website %}
+                {% if profile.professional_website %}
                     <div class="profile_label">
                         Professional Website
                     </div>
                     <p>
-                        <a href="{{ user.professional_website }}">{{ user.professional_website }}</a>
+                        <a href="{{ profile.professional_website }}">{{ profile.professional_website }}</a>
                     </p>
                 {% endif %}
 
-                {% if user.facebook %}
+                {% if profile.facebook %}
                     <div class="profile_label">
                         Facebook
                     </div>
                     <p>
-                        <a href="https://facebook.com/{{ user.facebook }}">{{ user.facebook }}</a>
+                        <a href="https://facebook.com/{{ profile.facebook }}">{{ profile.facebook }}</a>
                     </p>
                 {% endif %}
 
-                {% if user.twitter %}
+                {% if profile.twitter %}
                     <div class="profile_label">
                         Twitter
                     </div>
                     <p>
-                        <a href="https://twitter.com/{{ user.twitter }}">{{ user.twitter }}</a>
+                        <a href="https://twitter.com/{{ profile.twitter }}">{{ profile.twitter }}</a>
                     </p>
                 {% endif %}
 
-                {% if user.linkedin %}
+                {% if profile.linkedin %}
                     <div class="profile_label">
                         LinkedIn
                     </div>
                     <p>
-                        <a href="https://www.linkedin.com/in/{{ user.linkedin }}/">{{ user.linkedin }}</a>
+                        <a href="https://www.linkedin.com/in/{{ profile.linkedin }}/">{{ profile.linkedin }}</a>
                     </p>
                 {% endif %}
 
-                {% if user.ap_organizations %}
+                {% if profile.ap_organizations.count > 0 %}
                     <div class="profile_label">
                         Organizations
                     </div>
                     <ul>
-                        {% for org in user.ap_organizations.all  %}
+                        {% for org in profile.ap_organizations.all  %}
                             <li>
                                 {{org}} (link when we have org deet page)
                             </li>
@@ -103,12 +120,12 @@
                 {% endif %}
 
 
-                {% if user.photo_set.all %}
+                {% if profile.photo_set.all %}
                     <div class="profile_label">
                         Event photos
                     </div>
                     <ul>
-                        {% for photo in user.photo_set.all  %}
+                        {% for photo in profile.photo_set.all  %}
                             <li>
                                 {{photo}}
                                 {{ photo.file.url }}
