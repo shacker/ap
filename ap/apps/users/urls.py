@@ -7,8 +7,14 @@ app_name = 'users'
 urlpatterns = [
 
     path(
-        'list/',
+        '',
         view=views.users_list,
         name='list'
+    ),
+
+    path(
+        '<str:username>/',
+        view=views.profile,
+        name='profile'
     ),
 ]

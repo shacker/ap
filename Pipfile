@@ -17,6 +17,7 @@ libsass = "*"
 django-recaptcha = "*"
 django-crispy-forms = "*"
 bleach = "*"
+pillow = "*"
 
 [dev-packages]
 "flake8" = "*"

@@ -5,7 +5,7 @@ from ap.apps.users.models import Organization, User
 
 
 class UserAdmin(admin.ModelAdmin):
-    filter_horizontal = ['organizations', ]
+    filter_horizontal = ['ap_organizations', ]
     search_fields = ['username', 'first_name', 'last_name', ]
 
 
