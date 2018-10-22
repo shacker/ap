@@ -1,3 +1,4 @@
+import bleach
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render, reverse
@@ -30,10 +31,12 @@ def edit_profile(request: HttpRequest) -> HttpResponse:
     profile = get_object_or_404(User, username=request.user.username)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
+        # import pdb; pdb.set_trace()
 
         if form.is_valid():
             p = form.save(commit=False)
             p.profile_edited = True
+            p.about = bleach.clean(form.cleaned_data['about'], strip=True)
             form.save_m2m()
             p.save()
 
