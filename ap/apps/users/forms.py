@@ -13,13 +13,14 @@ class ProfileForm(forms.ModelForm):
         fields = [
             'about',
             'avatar',
-            'email',
             'personal_website',
             'professional_website',
             'facebook',
+            'instagram',
             'twitter',
             'linkedin',
-            'ap_organizations'
+            'ap_organizations',
+            'email',
         ]
 
     def __init__(self, *args, **kwargs):

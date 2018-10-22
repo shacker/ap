@@ -29,11 +29,13 @@ def edit_profile(request: HttpRequest) -> HttpResponse:
     """
     profile = get_object_or_404(User, username=request.user.username)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, request=request)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
 
         if form.is_valid():
-            form.save(commit=False)
-            form.save()
+            p = form.save(commit=False)
+            p.profile_edited = True
+            form.save_m2m()
+            p.save()
 
             messages.success(request, "Profile updated successfully")
             return redirect(reverse('users:profile', kwargs={"username": profile.username}))

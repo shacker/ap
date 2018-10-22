@@ -36,7 +36,7 @@ class User(AbstractUser):
     '''
 
     about = models.TextField(
-        help_text="Your bio / about you.",
+        help_text="A few sentences about you. Plain text only, no formatting.",
         blank=True
     )
 
@@ -69,6 +69,12 @@ class User(AbstractUser):
         blank=True,
         max_length=100,
         help_text="Your Facebook username (not URL)."
+    )
+
+    instagram = models.CharField(
+        blank=True,
+        max_length=100,
+        help_text="Your Instagram username (not URL)."
     )
 
     twitter = models.CharField(
