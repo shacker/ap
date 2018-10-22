@@ -13,8 +13,15 @@ urlpatterns = [
     ),
 
     path(
+        'edit/',
+        view=views.edit_profile,
+        name='edit_profile'
+    ),
+
+    path(
         '<str:username>/',
         view=views.profile,
         name='profile'
     ),
+
 ]

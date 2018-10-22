@@ -1,12 +1,29 @@
 from django import forms
-from django.contrib.auth.password_validation import validate_password, password_validators_help_texts
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+
+from ap.apps.users.models import User
 
 
-class SinglePasswordForm(forms.Form):
-    password1 = forms.CharField()
+class ProfileForm(forms.ModelForm):
 
-    def clean_password1(self) -> str:
-        password1 = self.cleaned_data.get('password1', '')
-        if validate_password(password1) is not None:
-            raise forms.ValidationError(password_validators_help_texts(), code='pw_invalid')
-        return password1
+    class Meta:
+        model = User
+        fields = [
+            'about',
+            'avatar',
+            'email',
+            'personal_website',
+            'professional_website',
+            'facebook',
+            'twitter',
+            'linkedin',
+            'ap_organizations'
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'Update Profile'))

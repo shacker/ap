@@ -1,6 +1,8 @@
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 
+from ap.apps.users.forms import ProfileForm
 from ap.apps.users.models import User
 
 
@@ -19,3 +21,22 @@ def profile(request: HttpRequest, username: str) -> HttpResponse:
     """
     profile = get_object_or_404(User, username=username)
     return render(request, 'users/profile.html', {'profile': profile}, )
+
+
+def edit_profile(request: HttpRequest) -> HttpResponse:
+    """
+    User edits own profile
+    """
+    profile = get_object_or_404(User, username=request.user.username)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, request=request)
+
+        if form.is_valid():
+            form.save(commit=False)
+            form.save()
+
+            messages.success(request, "Profile updated successfully")
+            return redirect(reverse('users:profile', kwargs={"username": profile.username}))
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'users/profile_edit.html', {"form": form}, )
