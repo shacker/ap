@@ -5,88 +5,88 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>
-                    {{ section_title }}
-                </h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>
+          {{ section_title }}
+        </h1>
 
-                {% if section_title == "Photographers" %}
-                    <dl>
-                        <dt>
-                            What is athlete.photo?
-                        </dt>
-                        <dd>
-                            Please see our <a href="{%url 'about' %}">About page</a> for a general explanation.
-                        </dd>
-                        <dt>
-                            How do I register as a photographer?
-                        </dt>
-                        <dd>
-                            Let us know about your equipment and send a sample of your work. Contact Us and we'll make you available as a photographer.
-                        </dd>
+        {% if section_title == "Photographers" %}
+          <dl>
+            <dt>
+              What is athlete.photo?
+            </dt>
+            <dd>
+              Please see our <a href="{%url 'about' %}">About page</a> for a general explanation.
+            </dd>
+            <dt>
+              How do I register as a photographer?
+            </dt>
+            <dd>
+              Let us know about your equipment and send a sample of your work. Contact Us and we'll make you available as a photographer.
+            </dd>
 
-                        <dt>
-                                How do I...
-                        </dt>
-                        <dd>
-                            Do it like this
-                        </dd>
-                    </dl>
-                {% endif %}
+            <dt>
+                How do I...
+            </dt>
+            <dd>
+              Do it like this
+            </dd>
+          </dl>
+        {% endif %}
 
-                {% if section_title == "Organizers" %}
-                    <dl>
-                        <dt>
-                            What is athlete.photo?
-                        </dt>
-                        <dd>
-                            Please see our <a href="{%url 'about' %}">About page</a> for a general explanation.
-                        </dd>
-                        <dt>
-                            How do I register as an event organizer?
-                        </dt>
-                        <dd>
-                            Contact Us and let us know a bit about your organization and your role in it. We'll convert your existing account to an Organizer account.
-                        </dd>
+        {% if section_title == "Organizers" %}
+          <dl>
+            <dt>
+              What is athlete.photo?
+            </dt>
+            <dd>
+              Please see our <a href="{%url 'about' %}">About page</a> for a general explanation.
+            </dd>
+            <dt>
+              How do I register as an event organizer?
+            </dt>
+            <dd>
+              Contact Us and let us know a bit about your organization and your role in it. We'll convert your existing account to an Organizer account.
+            </dd>
 
-                        <dt>
-                                How do I...
-                        </dt>
-                        <dd>
-                            Do it like this
-                        </dd>
-                    </dl>
-                {% endif %}
+            <dt>
+                How do I...
+            </dt>
+            <dd>
+              Do it like this
+            </dd>
+          </dl>
+        {% endif %}
 
-                {% if section_title == "Participants" %}
-                    <dl>
-                        <dt>
-                            What is athlete.photo?
-                        </dt>
-                        <dd>
-                            Please see our <a href="{%url 'about' %}">About page</a> for a general explanation.
-                        </dd>
-                        <dt>
-                            How do I participate
-                        </dt>
-                        <dd>
-                            Do it like this
-                        </dd>
+        {% if section_title == "Participants" %}
+          <dl>
+            <dt>
+              What is athlete.photo?
+            </dt>
+            <dd>
+              Please see our <a href="{%url 'about' %}">About page</a> for a general explanation.
+            </dd>
+            <dt>
+              How do I participate
+            </dt>
+            <dd>
+              Do it like this
+            </dd>
 
-                        <dt>
-                                How do I...
-                        </dt>
-                        <dd>
-                            Do it like this
-                        </dd>
-                    </dl>
-                {% endif %}
+            <dt>
+                How do I...
+            </dt>
+            <dd>
+              Do it like this
+            </dd>
+          </dl>
+        {% endif %}
 
 
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
 {% endblock content %}

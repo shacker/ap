@@ -5,59 +5,59 @@
 
 {% block content %}
 
-    <header class="masthead faqs text-white text-center">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 mx-auto">
-                    <h1 class="mb-5">How does this work?<br />
-                        Click a role below to learn more.
-                    </h1>
-                </div>
-            </div>
+  <header class="masthead faqs text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">How does this work?<br />
+            Click a role below to learn more.
+          </h1>
         </div>
-    </header>
+      </div>
+    </div>
+  </header>
 
-    <section class="features-icons bg-light text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <a href="{% url 'faqs:section' 'Participants' %}">
-                            <div class="features-icons-icon d-flex">
-                                <i class="icon-people m-auto text-primary"></i>
-                            </div>
-                            <h3>Participants</h3>
-                            <p class="lead mb-0">How to find and organize your photos</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <a href="{% url 'faqs:section' 'Organizers' %}">
-                            <div class="features-icons-icon d-flex">
-                                <i class="icon-layers m-auto text-primary"></i>
-                            </div>
-                            <h3>Organizers</h3>
-                            <p class="lead mb-0">How to set up an event</p>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                        <a href="{% url 'faqs:section' 'Photographers' %}">
-                            <div class="features-icons-icon d-flex">
-                                <i class="icon-camera m-auto text-primary"></i>
-                            </div>
-                            <h3>Photographers</h3>
-                            <p class="lead mb-0">How to register or upload</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
+  <section class="features-icons bg-light text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <a href="{% url 'faqs:section' 'Participants' %}">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-people m-auto text-primary"></i>
+              </div>
+              <h3>Participants</h3>
+              <p class="lead mb-0">How to find and organize your photos</p>
+            </a>
+          </div>
         </div>
-    </section>
+
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <a href="{% url 'faqs:section' 'Organizers' %}">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-layers m-auto text-primary"></i>
+              </div>
+              <h3>Organizers</h3>
+              <p class="lead mb-0">How to set up an event</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+            <a href="{% url 'faqs:section' 'Photographers' %}">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-camera m-auto text-primary"></i>
+              </div>
+              <h3>Photographers</h3>
+              <p class="lead mb-0">How to register or upload</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 {% endblock content %}
