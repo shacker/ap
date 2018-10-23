@@ -35,6 +35,10 @@
           </div>
         {% endif %}
 
+        {% if user == profile %}
+            <a href="{% url 'users:edit_profile' %}">EDIT</a>.
+        {% endif %}
+
         <div class="row">
           <div class="col-lg-2">
             {% if profile.avatar %}

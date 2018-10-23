@@ -13,13 +13,15 @@ class ProfileForm(forms.ModelForm):
         fields = [
             'about',
             'avatar',
+            'city',
+            'state_provenance',
+            'country',
             'personal_website',
             'professional_website',
             'facebook',
             'instagram',
             'twitter',
             'linkedin',
-            'ap_organizations',
             'email',
         ]
 

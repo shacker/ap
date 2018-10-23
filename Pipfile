@@ -32,6 +32,7 @@ pytest-django = "*"
 pytest-sugar = "*"
 pytest-faker = "*"
 django-debug-toolbar = "*"
+factory-boy = "*"
 
 [requires]
 python_version = "3.6"
