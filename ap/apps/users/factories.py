@@ -3,6 +3,7 @@ from typing import Any
 
 import factory
 from django.contrib.auth.models import Group
+from django.db import IntegrityError
 
 from ap.apps.users.constants import COUNTRY_CHOICES
 from ap.apps.users.models import User
@@ -30,12 +31,12 @@ class UserFactory(factory.django.DjangoModelFactory):
     professional_website = factory.Faker('url')
 
     @factory.post_generation
-    def maybe_add_groups(self, build: bool, extracted: Any, **kwargs: dict) -> None:
+    def maybe_add_groups(obj, build: bool, extracted: Any, **kwargs: dict) -> None:
         # Maybe assign a random role to generated user.
         dice = random.choice(range(5))
         if dice == 3:  # 1 in 5 chance we make this user a photographer or organizer
             group = Group.objects.all().order_by('?').first()
-            self.groups.add(group)
+            obj.groups.add(group)
 
     @classmethod
     def _create(cls, model_class, *args, **kwargs):

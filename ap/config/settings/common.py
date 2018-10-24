@@ -63,12 +63,13 @@ THIRD_PARTY_APPS = [
 
 
 LOCAL_APPS = [
+    "ap.apps.contact",
+    "ap.apps.core",
     "ap.apps.events",
-    "ap.apps.users",
+    "ap.apps.faqs",
     "ap.apps.orgs",
     "ap.apps.photos",
-    "ap.apps.contact",
-    "ap.apps.faqs",
+    "ap.apps.users",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
