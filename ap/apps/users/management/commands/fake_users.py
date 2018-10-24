@@ -7,9 +7,12 @@ import factory
 from ap.apps.orgs.models import Org
 from ap.apps.users.constants import COUNTRY_CHOICES
 from ap.apps.users.models import User
+from ap.apps.events.factories import EventFactory
+
 
 NUM_ORGS = 25
 NUM_USERS = 1000
+NUM_EVENTS = 50
 
 
 class Command(BaseCommand):
@@ -21,7 +24,7 @@ class Command(BaseCommand):
         shackadmin = User.objects.get(username='shackadmin')
 
         # Orgs first
-        for _ in range (NUM_ORGS):
+        for _ in range(NUM_ORGS):
             Org.objects.create(
                 name=fake.company(),
                 slug=fake.word(),
@@ -67,3 +70,6 @@ class Command(BaseCommand):
             except:
                 # Most likely the username is already taken
                 pass
+
+        EventFactory.create_batch(NUM_EVENTS)
+        print(f"{NUM_EVENTS} events created")
