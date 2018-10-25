@@ -15,7 +15,6 @@ EVENT_TYPE_CHOICES = (
 )
 
 
-# Create your models here.
 class Event(TimeStampedModel):
     """Data definition for an athletic Event."""
 
@@ -116,3 +115,28 @@ class Event(TimeStampedModel):
     def __str__(self):
         """Unicode representation of Event."""
         return self.name
+
+
+class Route(TimeStampedModel):
+    '''Links to route pages at Strava, MapMyRide, RideWithGPS, etc.
+    Unlimited number of route links per event.'''
+
+    event = models.ForeignKey(
+        Event,
+        on_delete=models.CASCADE
+    )
+
+    title = models.CharField(
+        max_length=140,
+        help_text="e.g. \"Albany Fun Run 13\" or \"Morro Bay Lighthouse Century 2018\""
+    )
+
+    url = models.URLField(
+        "URL",
+        max_length=200,
+        help_text="Link to route page at Strava, MapMyRide, RideWithGPS, etc."
+    )
+
+    def __str__(self):
+        """Unicode representation of Route."""
+        return f"Route for {self.title}"
