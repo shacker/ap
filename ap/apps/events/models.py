@@ -6,6 +6,14 @@ from django_extensions.db.models import TimeStampedModel
 from ap.apps.users.models import User
 from ap.apps.orgs.models import Org
 
+EVENT_TYPE_CHOICES = (
+    ('Ride', 'Ride'),
+    ('Run', 'Run'),
+    ('Swim', 'Swim'),
+    ('Triathlon', 'Triathlon'),
+    ('Other', 'Other'),
+)
+
 
 # Create your models here.
 class Event(TimeStampedModel):
@@ -18,6 +26,13 @@ class Event(TimeStampedModel):
     slug = AutoSlugField(
         populate_from='name'
     )
+
+    event_type = models.CharField(
+        max_length=12,
+        default='Other',
+        choices=EVENT_TYPE_CHOICES
+    )
+
 
     start = models.DateTimeField(
         auto_now=False,
