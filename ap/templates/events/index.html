@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Events{% endblock page_title %}
+
+{% block content %}
+
+  <header class="masthead faqs text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">How does this work?<br />
+            Click a role below to learn more.
+          </h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+      <h1>
+          Events
+      </h1>
+      <ul>
+      {% for event in events %}
+        <li>
+          {{ event }}
+        </li>
+      {% endfor %}
+      </ul>
+  </div>
+{% endblock content %}

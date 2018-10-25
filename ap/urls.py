@@ -26,6 +26,7 @@ urlpatterns = [
     path('faqs/', include('ap.apps.faqs.urls')),
     path('contact/', include('ap.apps.contact.urls')),
     path('athletes/', include('ap.apps.users.urls')),
+    path('events/', include('ap.apps.events.urls')),
     url(settings.ADMIN_URL, admin.site.urls),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

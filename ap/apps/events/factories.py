@@ -80,3 +80,4 @@ class EventFactory(factory.django.DjangoModelFactory):
     fee = factory.Faker('pydecimal', left_digits=4, right_digits=2, positive=True)
     fee_paid = factory.Faker('pybool')
     notes = factory.Faker('paragraph')
+    published = True

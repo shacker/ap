@@ -106,6 +106,13 @@ class Event(TimeStampedModel):
         help_text="Internal/private notes regarding the event. For use by athlete.photo only."
     )
 
+    published = models.BooleanField(
+        default=False,
+        help_text="Ready for public display (defaults to False)"
+    )
+
+    objects = models.Manager()
+
     class Meta:
         """Meta definition for Event."""
 
