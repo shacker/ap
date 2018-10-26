@@ -5,7 +5,9 @@ from django.utils.text import slugify
 
 from ap.apps.events.models import Event, EVENT_TYPE_CHOICES
 from ap.apps.orgs.models import Org
+from ap.apps.users.constants import COUNTRY_CHOICES
 from ap.apps.users.models import User
+
 
 event_list = [
     'Napa Wine Country Marathon',
@@ -71,7 +73,10 @@ class EventFactory(factory.django.DjangoModelFactory):
     event_type = factory.LazyAttribute(lambda o: random.choice(EVENT_TYPE_CHOICES)[0])
     slug = factory.LazyAttribute(lambda o: slugify(o.name))
     start = factory.Faker('date_time_this_century', tzinfo=pytz.UTC)
-    address = factory.Faker('address')
+    city = factory.Faker('city')
+    state_province = factory.Faker('state')
+    country = factory.LazyAttribute(lambda o: random.choice(COUNTRY_CHOICES)[0])
+    address = factory.Faker('street_address')
     latitude = factory.Faker('latitude')
     longitude = factory.Faker('longitude')
     url = factory.Faker('url')

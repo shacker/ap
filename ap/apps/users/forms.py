@@ -14,7 +14,7 @@ class ProfileForm(forms.ModelForm):
             'about',
             'avatar',
             'city',
-            'state_provenance',
+            'state_province',
             'country',
             'personal_website',
             'professional_website',

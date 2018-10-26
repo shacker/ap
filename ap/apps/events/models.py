@@ -5,6 +5,8 @@ from django_extensions.db.models import TimeStampedModel
 
 from ap.apps.users.models import User
 from ap.apps.orgs.models import Org
+from ap.apps.users.constants import COUNTRY_CHOICES
+
 
 EVENT_TYPE_CHOICES = (
     ('Ride', 'Ride'),
@@ -40,11 +42,30 @@ class Event(TimeStampedModel):
         help_text="Date and time for start of event."
     )
 
+    city = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text="City or town for event meeting place."
+    )
+
+    state_province = models.CharField(
+        'State or Province',
+        blank=True,
+        max_length=100,
+        help_text="State, region, or province for event meeting place"
+    )
+
+    country = models.CharField(
+        blank=True,
+        max_length=64,
+        choices=COUNTRY_CHOICES)
+
     address = models.CharField(
         max_length=255,
         blank=True,
         null=True,
-        help_text="Human-readable address or location for event meeting place."
+        help_text="Street address/location for event meeting place. Do not include city/state/country."
     )
 
     latitude = models.DecimalField(

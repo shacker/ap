@@ -7,12 +7,10 @@ from django.db import models
 from ap.apps.users.constants import COUNTRY_CHOICES
 
 
-
 def get_avatar_upload_dir(instance: Any, filename: str) -> str:
     """Determine upload dir for avatar image files
     """
     return '/'.join(['avatars', instance.username, filename])
-
 
 
 class User(AbstractUser):
@@ -33,11 +31,11 @@ class User(AbstractUser):
         help_text="Name of your city"
     )
 
-    state_provenance = models.CharField(
-        'State or Provenance',
+    state_province = models.CharField(
+        'State or Province',
         blank=True,
         max_length=100,
-        help_text="Name of your state or provenance"
+        help_text="Name of your state or province"
     )
 
     country = models.CharField(

@@ -20,7 +20,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     username = factory.LazyAttribute(lambda o: f"{o.first_name.lower()}_{o.last_name.lower()}")
     email = factory.Faker('email')
     city = factory.Faker('city')
-    state_provenance = factory.Faker('state')
+    state_province = factory.Faker('state')
     country = factory.LazyAttribute(lambda o: random.choice([x[0] for x in COUNTRY_CHOICES]))
     about = factory.Faker('text', max_nb_chars=600)
     facebook = factory.LazyAttribute(lambda o: o.username)

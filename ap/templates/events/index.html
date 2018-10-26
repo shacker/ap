@@ -21,12 +21,31 @@
       <h1>
           Events
       </h1>
-      <ul>
-      {% for event in events %}
-        <li>
-          {{ event }}
-        </li>
+      <table class="table">
+        <tr>
+          <th>
+            Date
+          </th>
+          <th>
+            Event
+          </th>
+          <th>
+            Region
+          </th>
+        </tr>
+      {% for event in events_future %}
+        <tr>
+          <td>
+            {{ event.start|date:"M d, Y" }}
+          </td>
+          <td>
+            <a href="">{{ event }}</a>
+          </td>
+          <td>
+            {{ event.city }}, {{ event.state_province }} ({{ event.get_country_display }})
+          </td>
+        </tr>
       {% endfor %}
-      </ul>
+      </table>
   </div>
 {% endblock content %}
