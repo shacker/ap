@@ -19,7 +19,7 @@
 
   <div class="container">
       <h1>
-          Events
+        {% if tense == "past" %}Past{% else %}Upcoming{% endif %} Events
       </h1>
       <table class="table">
         <tr>
@@ -33,10 +33,10 @@
             Region
           </th>
         </tr>
-      {% for event in events_future %}
+      {% for event in events %}
         <tr>
           <td>
-            {{ event.start|date:"M d, Y" }}
+            {{ event.start|date:"M j, Y" }}
           </td>
           <td>
             <a href="">{{ event }}</a>
@@ -47,5 +47,12 @@
         </tr>
       {% endfor %}
       </table>
+
+      {% if tense == "past" %}
+        <a class="btn btn-primary" href="{% url 'events:index' %}">See Upcoming Events</a>
+      {% else %}
+        <a class="btn btn-primary" href="{% url 'events:index' tense='past' %}">See Past Events</a>
+      {% endif %}
+
   </div>
 {% endblock content %}

@@ -12,6 +12,11 @@ urlpatterns = [
     #     name="section"),
 
     path(
+        '<str:tense>/',
+        views.index,
+        name="index"),
+
+    path(
         '',
         views.index,
         name="index"),

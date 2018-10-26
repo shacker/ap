@@ -4,10 +4,19 @@ from django.shortcuts import render
 from ap.apps.events.models import Event
 
 
-def index(request):
-    '''List/search all eventss'''
+def index(request, tense: str=None):
+    '''List/search all events'''
 
     today = datetime.date.today()
-    events_future = Event.objects.filter(published=True, start__gte=today).order_by('start')
+    events = Event.objects.filter(published=True)
+    if tense == "past":
+        events = events.filter(start__lte=today)
+        events = events.order_by('-start')
+    else:
+        events = events.filter(start__gte=today)
+        events = events.order_by('start')
 
-    return render(request, "events/index.html", {"events_future": events_future})
+    return render(request, "events/index.html", {
+        "events": events,
+        "tense": tense
+    })
