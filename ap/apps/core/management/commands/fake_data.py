@@ -4,9 +4,8 @@ from random import randint
 
 from django.core.management.base import BaseCommand
 
-from ap.apps.events.factories import EventFactory
+from ap.apps.events.factories import EventFactory, OrgFactory
 from ap.apps.events.models import Event
-from ap.apps.orgs.factories import OrgFactory
 from ap.apps.users.factories import UserFactory
 
 NUM_ORGS = 25

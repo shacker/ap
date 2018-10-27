@@ -67,7 +67,6 @@ LOCAL_APPS = [
     "ap.apps.core",
     "ap.apps.events",
     "ap.apps.faqs",
-    "ap.apps.orgs",
     "ap.apps.photos",
     "ap.apps.users",
 ]

@@ -6,14 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('orgs', '0001_initial'),
+        # ('orgs', '0001_initial'),
         ('users', '0010_auto_20181022_2249'),
     ]
 
-    operations = [
-        migrations.AddField(
-            model_name='user',
-            name='ap_organizations',
-            field=models.ManyToManyField(blank=True, help_text='Groups or organizations registered on athlete.photo, of which this user is a member.', to='orgs.Org', verbose_name='AP Orgs'),
-        ),
-    ]
+    # operations = [
+    #     migrations.AddField(
+    #         model_name='user',
+    #         name='ap_organizations',
+    #         field=models.ManyToManyField(blank=True, help_text='Groups or organizations registered on athlete.photo, of which this user is a member.', to='orgs.Org', verbose_name='AP Orgs'),
+    #     ),
+    # ]

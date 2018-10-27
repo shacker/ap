@@ -7,7 +7,7 @@ from ap.apps.users.models import User
 
 class UserAdmin(admin.ModelAdmin):
     search_fields = ['username', 'first_name', 'last_name', ]
-    filter_horizontal = ['ap_organizations', ]
+    filter_horizontal = ['organizations', ]
     list_display = ['username', 'usergroups']
     list_filter = ('groups', )
 

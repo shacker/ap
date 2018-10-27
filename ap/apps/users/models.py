@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.db import models
 
 from ap.apps.users.constants import COUNTRY_CHOICES
+# from ap.apps.events.models import Organization
 
 
 def get_avatar_upload_dir(instance: Any, filename: str) -> str:
@@ -93,11 +94,10 @@ class User(AbstractUser):
         help_text="Your LinkedIn username (not URL)."
     )
 
-    ap_organizations = models.ManyToManyField(
-        'orgs.Org',
+    organizations = models.ManyToManyField(
+        'events.organization',
         blank=True,
-        verbose_name="AP Orgs",
-        help_text="Groups or organizations registered on athlete.photo, of which this user is a member.",
+        help_text="One or more organizations with which this user is affiliated."
     )
 
     profile_edited = models.BooleanField(

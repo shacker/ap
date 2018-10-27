@@ -1,13 +1,13 @@
 import random
-import pytz
+from typing import Any
+
 import factory
+import pytz
 from django.utils.text import slugify
 
-from ap.apps.events.models import Event, EVENT_TYPE_CHOICES
-from ap.apps.orgs.models import Org
+from ap.apps.events.models import EVENT_TYPE_CHOICES, Event, Organization
 from ap.apps.users.constants import COUNTRY_CHOICES
 from ap.apps.users.models import User
-
 
 event_list = [
     'Napa Wine Country Marathon',
@@ -58,7 +58,6 @@ event_list = [
     'Du It Again',
     'Harvest Hootenanny Biathlon',
     'Las Vegas Kids Triathlon Long',
-    'Las Vegas Kids Triathlon Short',
     'Patagonia Lake Triathlon - Olympic Triathlon',
     '2018 Trick or Tri 70.3 Mile',
 ]
@@ -81,8 +80,28 @@ class EventFactory(factory.django.DjangoModelFactory):
     longitude = factory.Faker('longitude')
     url = factory.Faker('url')
     human = User.objects.all().order_by('?').first()
-    organization = Org.objects.all().order_by('?').first()
     fee = factory.Faker('pydecimal', left_digits=4, right_digits=2, positive=True)
     fee_paid = factory.Faker('pybool')
     notes = factory.Faker('paragraph')
     published = True
+
+    @factory.post_generation
+    def maybe_add_orgs(obj, build: bool, extracted: Any, **kwargs: dict) -> None:
+        # Maybe assign a random org to generated event.
+        dice = random.choice(range(1, 5))
+        for _ in range(dice):
+            org = Organization.objects.all().order_by('?').first()
+            obj.organizations.add(org)
+
+
+class OrgFactory(factory.django.DjangoModelFactory):
+    """Fabricate an organization with realistic data"""
+    class Meta:
+        model = Organization
+
+    name = factory.Faker('company')
+    slug = factory.LazyAttribute(lambda o: slugify(o.name))
+    address = factory.Faker('address')
+    phone = factory.Faker('phone_number')
+    email = factory.Faker('email')
+    human = factory.LazyAttribute(lambda o: User.objects.all().order_by('?').first())

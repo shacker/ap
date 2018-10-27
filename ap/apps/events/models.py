@@ -4,7 +4,7 @@ from django_extensions.db.fields import AutoSlugField
 from django_extensions.db.models import TimeStampedModel
 
 from ap.apps.users.models import User
-from ap.apps.orgs.models import Org
+# from ap.apps.orgs.models import Org
 from ap.apps.users.constants import COUNTRY_CHOICES
 
 
@@ -15,6 +15,52 @@ EVENT_TYPE_CHOICES = (
     ('Triathlon', 'Triathlon'),
     ('Other', 'Other'),
 )
+
+
+class Organization(TimeStampedModel):
+    """Data definition for an Organization."""
+
+    name = models.CharField(
+        max_length=100
+    )
+
+    slug = models.SlugField(
+        help_text="Shortened version of organization name for use in URLs"
+    )
+
+    address = models.CharField(
+        max_length=255,
+        blank=True,
+    )
+
+    phone = models.CharField(
+        max_length=64,
+        blank=True,
+    )
+
+    email = models.EmailField(
+        max_length=254,
+        blank=True,
+    )
+
+    human = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
+
+    objects = models.Manager()
+
+    class Meta:
+        """Meta definition for Organization."""
+
+        verbose_name = 'Organization'
+        verbose_name_plural = 'Organizations'
+
+    def __str__(self):
+        """Unicode representation of Organization."""
+        return self.name
 
 
 class Event(TimeStampedModel):
@@ -100,13 +146,10 @@ class Event(TimeStampedModel):
         help_text="Another user on athlete.photo functioning as a contact for this event."
     )
 
-    organization = models.ForeignKey(
-        Org,
+    organizations = models.ManyToManyField(
+        Organization,
         blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-        verbose_name="Organization",
-        help_text="An organization registered on athlete.photo representing the overall host for this event."
+        help_text="One or more organizations that sponsor or support this event."
     )
 
     fee = models.DecimalField(
