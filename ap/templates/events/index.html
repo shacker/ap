@@ -39,7 +39,7 @@
             {{ event.start|date:"M j, Y" }}
           </td>
           <td>
-            <a href="">{{ event }}</a>
+            <a href="{% url 'events:detail' event.id event.slug %}">{{ event }}</a>
           </td>
           <td>
             {{ event.city }}, {{ event.state_province }} ({{ event.get_country_display }})

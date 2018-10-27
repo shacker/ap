@@ -1,6 +1,5 @@
 import datetime
-from django.shortcuts import render
-
+from django.shortcuts import render, get_object_or_404
 from ap.apps.events.models import Event
 
 
@@ -19,4 +18,14 @@ def index(request, tense: str=None):
     return render(request, "events/index.html", {
         "events": events,
         "tense": tense
+    })
+
+
+def detail(request, event_id: int, event_slug: str=None):
+    '''Details for a specific event'''
+
+    event = get_object_or_404(Event, id=event_id)
+
+    return render(request, "events/detail.html", {
+        "event": event,
     })

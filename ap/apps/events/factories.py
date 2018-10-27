@@ -70,6 +70,7 @@ class EventFactory(factory.django.DjangoModelFactory):
 
     name = factory.LazyAttribute(lambda o: random.choice(event_list))
     event_type = factory.LazyAttribute(lambda o: random.choice(EVENT_TYPE_CHOICES)[0])
+    about = factory.Faker('paragraph')
     slug = factory.LazyAttribute(lambda o: slugify(o.name))
     start = factory.Faker('date_time_this_century', tzinfo=pytz.UTC)
     city = factory.Faker('city')
@@ -78,7 +79,8 @@ class EventFactory(factory.django.DjangoModelFactory):
     address = factory.Faker('street_address')
     latitude = factory.Faker('latitude')
     longitude = factory.Faker('longitude')
-    url = factory.Faker('url')
+    official_event_site_url = factory.Faker('url')
+    official_event_site_title = factory.Faker('text', max_nb_chars=100)
     human = User.objects.all().order_by('?').first()
     fee = factory.Faker('pydecimal', left_digits=4, right_digits=2, positive=True)
     fee_paid = factory.Faker('pybool')

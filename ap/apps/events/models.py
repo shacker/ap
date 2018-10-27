@@ -80,6 +80,11 @@ class Event(TimeStampedModel):
         choices=EVENT_TYPE_CHOICES
     )
 
+    about = models.TextField(
+        blank=True,
+        help_text="Brief description of this event. Plain text only."
+    )
+
     start = models.DateTimeField(
         auto_now=False,
         auto_now_add=False,
@@ -130,11 +135,17 @@ class Event(TimeStampedModel):
         help_text="For map display"
     )
 
-    url = models.URLField(
+    official_event_site_url = models.URLField(
         blank=True,
         null=True,
         max_length=200,
         help_text="URL for primary Event page elsewhere on the internet."
+    )
+
+    official_event_site_title = models.CharField(
+        blank=True,
+        max_length=200,
+        help_text="Site title for primary Event page elsewhere on the internet."
     )
 
     human = models.ForeignKey(

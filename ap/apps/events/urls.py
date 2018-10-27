@@ -6,10 +6,10 @@ app_name = 'events'
 
 urlpatterns = [
 
-    # path(
-    #     '<str:section_title>/',
-    #     views.section,
-    #     name="section"),
+    path(
+        '<int:event_id>/<str:event_slug>/',
+        views.detail,
+        name="detail"),
 
     path(
         '<str:tense>/',

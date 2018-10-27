@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ event.name }}{% endblock page_title %}
+
+{% block content %}
+
+  <header class="masthead faqs text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">How does this work?<br />
+            Click a role below to learn more.
+          </h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <h1>
+      {{ event.name }}
+    </h1>
+
+    <p>
+      Event type: {{ event.event_type }}
+    </p>
+
+    <p>
+      About this event:
+      {{ event.about }}
+    </p>
+
+    <p>
+      Start date/time: {{ event.start }}
+    </p>
+
+    <p>
+      Start location:
+      {{ event.address }},
+      {{ event.city }}
+    </p>
+
+    <p>
+      State or province:
+      {{ event.state_province }}
+    </p>
+
+    <p>
+      Country:
+      {{ event.get_country_display }}
+    </p>
+
+    <p>
+      Coordinates:
+      {{ event.latitude }},
+      {{ event.longitude }}
+    </p>
+
+    <p>
+      Official site page:
+      <a href="{{ event.official_event_site_url }}" target="_blank">
+        {{ event.official_event_site_title }}
+      </a>
+    </p>
+
+    <p>
+      Human:
+      {{ event.human }}
+    </p>
+
+    <p>
+      Organizations:
+      <ul>
+      {% for org in event.organizations.all %}
+        <li>
+          {{ org }}
+        </li>
+      {% endfor %}
+      </ul>
+    </p>
+
+    <p>
+      Routes:
+      <ul>
+      {% for route in event.route_set.all %}
+        <li>
+          <a href="{{ route.url }}" target="_blank">{{ route.title }}</a>
+        </li>
+      {% endfor %}
+      </ul>
+    </p>
+
+  </div>
+{% endblock content %}
+
+
+    organizations = models.ManyToManyField(
+        Organization,
+        blank=True,
+        help_text="One or more organizations that sponsor or support this event."
+    )
+
+
