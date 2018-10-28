@@ -19,6 +19,7 @@ django-crispy-forms = "*"
 bleach = "*"
 pillow = "*"
 sorl-thumbnail = "*"
+factory-boy = "*"
 
 [dev-packages]
 "flake8" = "*"

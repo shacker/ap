@@ -8,59 +8,7 @@ from django.utils.text import slugify
 from ap.apps.events.models import EVENT_TYPE_CHOICES, Event, Organization
 from ap.apps.users.constants import COUNTRY_CHOICES
 from ap.apps.users.models import User
-
-event_list = [
-    'Napa Wine Country Marathon',
-    'ZombieRunner Halloween',
-    'Lake Chabot',
-    'Santa Clarita Marathon',
-    'Two Cities Marathon',
-    'CATHalf and Pounding Creek Marathon',
-    'Chessie Trail Fall Half Marathon',
-    'Day of the Dead Marathon Series',
-    'Goblin Valley Ultra',
-    'Grants Pass Marathon',
-    'I Ran Flagship Marathons - Estonia',
-    'I Ran Marathons - Count Dracula',
-    'Kansas Rails-to-Trails Fall Ultra Extravaganza',
-    'Marathon on the Mountain',
-    'Silver Comet Races',
-    'Skydive Ultra Texas',
-    'Spinx Run Fest',
-    'Best of the Bay Double Century',
-    'Grizzly Century',
-    'The Jensie Gran Fondo of Marin',
-    'Konocti Challenge',
-    'Westlake Village Century',
-    'Wine and Roses Bike Ride',
-    'Bass Lake Powerhouse Double Century',
-    'Phils Cookie Fondo',
-    'Patriot Ride for our Heroes',
-    'Solvang Autumn Double Century',
-    'Spooktacular Century',
-    'The Wildcat Gran Fondo',
-    'Giro di San Diego',
-    'Victor Valley Bicycle Tour',
-    'Bike the Coast',
-    'Swamdo / Swami\'s Fondo',
-    'Palm Desert Century',
-    'Tour de Foothills',
-    '2018 Postal Two-Mile Relay (USMS)',
-    'University of Miami Orange and Green Meet (College Club)',
-    'War Eagle Invitational (College Club)',
-    'Fall Champs 2018 (College Club)',
-    '3rd Annual Twin Cities Invite (College Club)',
-    '46th Leatherstocking Swim Meet (USMS)',
-    'Sugar Creek Swim Club Pumpkin Paddle Invitational (USMS)',
-    'AU vs. Emory University (College Club)',
-    '2018 Shark Tank SCM Meet (USMS)',
-    'Ottermania 2018 (MSC)',
-    'Du It Again',
-    'Harvest Hootenanny Biathlon',
-    'Las Vegas Kids Triathlon Long',
-    'Patagonia Lake Triathlon - Olympic Triathlon',
-    '2018 Trick or Tri 70.3 Mile',
-]
+from ap.apps.events.factory_data import RANDOM_EVENT_LIST, RANDOM_COORDS_LIST
 
 
 class EventFactory(factory.django.DjangoModelFactory):
@@ -68,17 +16,14 @@ class EventFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Event
 
-    name = factory.LazyAttribute(lambda o: random.choice(event_list))
+    name = factory.LazyAttribute(lambda o: random.choice(RANDOM_EVENT_LIST))
     event_type = factory.LazyAttribute(lambda o: random.choice(EVENT_TYPE_CHOICES)[0])
-    about = factory.Faker('paragraph')
     slug = factory.LazyAttribute(lambda o: slugify(o.name))
     start = factory.Faker('date_time_this_century', tzinfo=pytz.UTC)
     city = factory.Faker('city')
     state_province = factory.Faker('state')
     country = factory.LazyAttribute(lambda o: random.choice(COUNTRY_CHOICES)[0])
     address = factory.Faker('street_address')
-    latitude = factory.Faker('latitude')
-    longitude = factory.Faker('longitude')
     official_event_site_url = factory.Faker('url')
     official_event_site_title = factory.Faker('text', max_nb_chars=100)
     human = User.objects.all().order_by('?').first()
@@ -94,6 +39,13 @@ class EventFactory(factory.django.DjangoModelFactory):
         for _ in range(dice):
             org = Organization.objects.all().order_by('?').first()
             obj.organizations.add(org)
+
+    @factory.post_generation
+    def add_coords(obj, build: bool, extracted: Any, **kwargs: dict) -> None:
+        # Select from actual city coordinates guaranteed to be on land
+        coords = random.choice(RANDOM_COORDS_LIST)
+        obj.latitude = coords[0]
+        obj.longitude = coords[1]
 
 
 class OrgFactory(factory.django.DjangoModelFactory):
