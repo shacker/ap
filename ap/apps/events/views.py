@@ -1,5 +1,8 @@
 import datetime
+
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404
+
 from ap.apps.events.models import Event
 
 
@@ -28,4 +31,5 @@ def detail(request, event_id: int, event_slug: str=None):
 
     return render(request, "events/detail.html", {
         "event": event,
+        "google_api_key": settings.GOOGLE_API_KEY
     })

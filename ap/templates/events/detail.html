@@ -2,6 +2,16 @@
 
 {% block page_title %}{{ event.name }}{% endblock page_title %}
 
+{% block extra_head %}
+    <style>
+      #map {
+        height: 450px;
+        width: 600px;
+       }
+    </style>
+{% endblock extra_head %}
+
+
 {% block content %}
 
   <header class="masthead faqs text-white text-center">
@@ -39,23 +49,15 @@
     <p>
       Start location:
       {{ event.address }},
-      {{ event.city }}
-    </p>
-
-    <p>
-      State or province:
+      {{ event.city }},
       {{ event.state_province }}
+      ({{ event.get_country_display }})
     </p>
 
-    <p>
-      Country:
-      {{ event.get_country_display }}
-    </p>
 
     <p>
-      Coordinates:
-      {{ event.latitude }},
-      {{ event.longitude }}
+      Map to meeting place:
+      <div id="map"></div>
     </p>
 
     <p>
@@ -95,11 +97,27 @@
   </div>
 {% endblock content %}
 
+{% block extra_foot %}
 
-    organizations = models.ManyToManyField(
-        Organization,
-        blank=True,
-        help_text="One or more organizations that sponsor or support this event."
-    )
+  <script>
+    function initMap() {
+    var eventplace = { lat: {{ event.latitude }}, lng: {{event.longitude}} };
+    var map = new google.maps.Map(
+      document.getElementById('map'), {
+        zoom: 7,
+        center: eventplace,
+        streetViewControl: false
+      }
+    );
+    // Add a marker
+    var marker = new google.maps.Marker({position: eventplace, map: map});
+  }
+  </script>
+  <script
+    async
+    defer
+    src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">
+  </script>
+{% endblock extra_foot %}
 
 
