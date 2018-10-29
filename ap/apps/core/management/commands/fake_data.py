@@ -10,7 +10,7 @@ from ap.apps.users.factories import UserFactory
 
 NUM_ORGS = 25
 NUM_USERS = 500
-NUM_EVENTS = 50
+NUM_EVENTS = 500
 
 
 class Command(BaseCommand):

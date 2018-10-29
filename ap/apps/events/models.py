@@ -9,11 +9,13 @@ from ap.apps.users.constants import COUNTRY_CHOICES
 
 
 EVENT_TYPE_CHOICES = (
-    ('Ride', 'Ride'),
-    ('Run', 'Run'),
-    ('Swim', 'Swim'),
-    ('Triathlon', 'Triathlon'),
-    ('Other', 'Other'),
+    ('roadbike', 'Cycling'),
+    ('hike', 'Hike'),
+    ('mtb', 'Mountain Bike'),
+    ('run', 'Run'),
+    ('swim', 'Swim'),
+    ('tri', 'Triathlon'),
+    ('other', 'Other'),
 )
 
 
@@ -76,7 +78,7 @@ class Event(TimeStampedModel):
 
     event_type = models.CharField(
         max_length=12,
-        default='Other',
+        default='other',
         choices=EVENT_TYPE_CHOICES
     )
 
@@ -91,6 +93,12 @@ class Event(TimeStampedModel):
         blank=True,
         null=True,
         help_text="Date and time for start of event."
+    )
+
+    place_name = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text="Name of the site, building, or area where event begins."
     )
 
     city = models.CharField(
@@ -148,11 +156,9 @@ class Event(TimeStampedModel):
         help_text="Site title for primary Event page elsewhere on the internet."
     )
 
-    human = models.ForeignKey(
+    humans = models.ManyToManyField(
         User,
         blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
         verbose_name="Human Contact",
         help_text="Another user on athlete.photo functioning as a contact for this event."
     )

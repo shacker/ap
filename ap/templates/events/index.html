@@ -30,6 +30,9 @@
             Event
           </th>
           <th>
+            Type
+          </th>
+          <th>
             Region
           </th>
         </tr>
@@ -40,6 +43,9 @@
           </td>
           <td>
             <a href="{% url 'events:detail' event.id event.slug %}">{{ event }}</a>
+          </td>
+          <td>
+            {{ event.get_event_type_display }}
           </td>
           <td>
             {{ event.city }}, {{ event.state_province }} ({{ event.get_country_display }})

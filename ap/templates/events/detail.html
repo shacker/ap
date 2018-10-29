@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block page_title %}{{ event.name }}{% endblock page_title %}
 
 {% block extra_head %}
     <style>
       #map {
-        height: 450px;
-        width: 600px;
+        height: 550px;
+        width: 700px;
        }
     </style>
 {% endblock extra_head %}
@@ -14,7 +15,7 @@
 
 {% block content %}
 
-  <header class="masthead faqs text-white text-center">
+  <header class="masthead faqs text-white text-center mb-4">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -33,21 +34,31 @@
       {{ event.name }}
     </h1>
 
+    <div class="media mb-4 mt-4">
+      <div class="media-left media-middle">
+        {% with 'img/icons/'|add:event.event_type|add:".png" as iconfilepath  %}
+          <img
+            class="media-object"
+            src="{% static iconfilepath %}"
+            alt="{{ event.get_event_type_display }}"
+            width="75px"
+          />
+        {% endwith %}
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">{{ event.get_event_type_display }} Event</h4>
+        {{ event.about }}
+      </div>
+    </div>
+
     <p>
-      Event type: {{ event.event_type }}
+      <b>Start date/time:</b><br />
+      {{ event.start }}
     </p>
 
     <p>
-      About this event:
-      {{ event.about }}
-    </p>
-
-    <p>
-      Start date/time: {{ event.start }}
-    </p>
-
-    <p>
-      Start location:
+      <b>Start location:</b><br />
+      {{ event.place_name }},
       {{ event.address }},
       {{ event.city }},
       {{ event.state_province }}
@@ -56,24 +67,31 @@
 
 
     <p>
-      Map to meeting place:
+      <b>Map to meeting place:</b><br />
       <div id="map"></div>
     </p>
 
     <p>
-      Official site page:
+      <b>Register / More Information / Website:</b><br />
       <a href="{{ event.official_event_site_url }}" target="_blank">
         {{ event.official_event_site_title }}
       </a>
     </p>
 
     <p>
-      Human:
-      {{ event.human }}
+      <b>Routes:</b>
+      <ul>
+      {% for route in event.route_set.all %}
+        <li>
+          <a href="{{ route.url }}" target="_blank">{{ route.title }}</a>
+        </li>
+      {% endfor %}
+      </ul>
     </p>
 
+
     <p>
-      Organizations:
+      <b>Organizations:</b>
       <ul>
       {% for org in event.organizations.all %}
         <li>
@@ -84,15 +102,22 @@
     </p>
 
     <p>
-      Routes:
+      <b>Human Contact{{ event.humans.all.count|pluralize }}:</b><br />
       <ul>
-      {% for route in event.route_set.all %}
+      {% for human in event.humans.all %}
         <li>
-          <a href="{{ route.url }}" target="_blank">{{ route.title }}</a>
+          <a href="{% url 'users:profile' human.username %}">{{ human.get_full_name }} (TITLE)</a>
         </li>
       {% endfor %}
       </ul>
     </p>
+
+    {% if user.is_superuser %}
+    <hr />
+      <p>
+        <a href="{% url 'admin:events_event_change' event.id %}" class="btn btn-sm btn-primary">Edit</a>
+      </p>
+    {% endif %}
 
   </div>
 {% endblock content %}
@@ -104,7 +129,7 @@
     var eventplace = { lat: {{ event.latitude }}, lng: {{event.longitude}} };
     var map = new google.maps.Map(
       document.getElementById('map'), {
-        zoom: 7,
+        zoom: 14,
         center: eventplace,
         streetViewControl: false
       }

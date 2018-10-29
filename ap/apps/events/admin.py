@@ -14,7 +14,7 @@ class OrgAdmin(admin.ModelAdmin):
 
 
 class EventAdmin(admin.ModelAdmin):
-    autocomplete_fields = ['human', ]
+    autocomplete_fields = ['humans', ]
     list_display = ['name', 'event_type', 'start', 'fee_paid']
     inlines = [RouteInline, ]
     filter_horizontal = ['organizations', ]

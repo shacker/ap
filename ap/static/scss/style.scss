@@ -150,3 +150,9 @@ body {
   label, .profile_label {
     font-weight: bold;
   }
+
+  // Text wrapping around bootstrap "media" elements, i.e. the cycling icon that
+  // the event About text wraps around.
+  .media-body {
+    margin-left: 20px;
+  }
