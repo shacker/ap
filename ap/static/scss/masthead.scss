@@ -3,8 +3,8 @@ header.masthead {
     background-color: #343a40;
     background: url("../img/bg-masthead.jpg") no-repeat center center;
     background-size: cover;
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 
   header.masthead .overlay {
@@ -23,22 +23,26 @@ header.masthead {
 
   header.masthead.faqs {
     background: url("../img/bg-faqs.jpg") no-repeat center center;
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
   }
 
   header.masthead.about {
     background: url("../img/bg-about.jpg") no-repeat center center;
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
   }
 
   header.masthead.events {
     background: url("../img/bg-events.jpg") no-repeat center center;
-    // image-rendering: -webkit-optimize-contrast;
-    // background-size: cover;background-position:50% 50%;
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  header.masthead.profiles {
+    background: url("../img/bg-profiles.jpg") no-repeat center center;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
   }
 
   @media (min-width: 768px) {
