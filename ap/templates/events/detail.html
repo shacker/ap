@@ -15,13 +15,13 @@
 
 {% block content %}
 
-  <header class="masthead faqs text-white text-center mb-4">
+  <header class="masthead events text-white text-center mb-4">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-xl-9 mx-auto">
-          <h1 class="mb-5">How does this work?<br />
-            Click a role below to learn more.
+          <h1 class="mb-5">{{ event.name }}<br />
+            {{ event.place_name }}, {{ event.city }}
           </h1>
         </div>
       </div>
@@ -91,7 +91,7 @@
 
 
     <p>
-      <b>Organizations:</b>
+      <b>Supporting Organizations:</b>
       <ul>
       {% for org in event.organizations.all %}
         <li>

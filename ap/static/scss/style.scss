@@ -30,7 +30,7 @@ body {
     width: 100%;
     top: 0;
     left: 0;
-    opacity: 0.3;
+    opacity: 0;
   }
 
   header.masthead h1 {
@@ -45,6 +45,14 @@ body {
 
   header.masthead.about {
     background: url("../img/bg-about.jpg") no-repeat center center;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  header.masthead.events {
+    background: url("../img/bg-events.jpg") no-repeat center center;
+    // image-rendering: -webkit-optimize-contrast;
+    // background-size: cover;background-position:50% 50%;
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
