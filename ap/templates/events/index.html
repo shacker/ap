@@ -36,7 +36,7 @@
             Region
           </th>
         </tr>
-      {% for event in events %}
+      {% for event in events_list %}
         <tr>
           <td>
             {{ event.start|date:"M j, Y" }}
@@ -59,6 +59,8 @@
       {% else %}
         <a class="btn btn-primary" href="{% url 'events:index' tense='past' %}">See Past Events</a>
       {% endif %}
+
+      {% include 'core/_pagination.html' with items=events_list %}
 
   </div>
 {% endblock content %}

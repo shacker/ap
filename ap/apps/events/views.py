@@ -1,7 +1,8 @@
 import datetime
 
 from django.conf import settings
-from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator
+from django.shortcuts import get_object_or_404, render
 
 from ap.apps.events.models import Event
 
@@ -18,8 +19,12 @@ def index(request, tense: str=None):
         events = events.filter(start__gte=today)
         events = events.order_by('start')
 
+    paginator = Paginator(events, 10)  # num per page
+    page = request.GET.get('page')
+    events_list = paginator.get_page(page)
+
     return render(request, "events/index.html", {
-        "events": events,
+        "events_list": events_list,
         "tense": tense
     })
 
