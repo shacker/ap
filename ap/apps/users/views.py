@@ -1,5 +1,6 @@
 import bleach
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 
@@ -13,7 +14,10 @@ def users_list(request: HttpRequest) -> HttpResponse:
     """
 
     users = User.objects.all()
-    return render(request, 'users/index.html', {'users': users}, )
+    paginator = Paginator(users, 100)  # num per page
+    page = request.GET.get('page')
+    athletes = paginator.get_page(page)
+    return render(request, 'users/index.html', {'athletes': athletes}, )
 
 
 def profile(request: HttpRequest, username: str) -> HttpResponse:
