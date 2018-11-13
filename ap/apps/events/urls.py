@@ -7,6 +7,11 @@ app_name = 'events'
 urlpatterns = [
 
     path(
+        'search/',
+        views.search,
+        name="search"),
+
+    path(
         '<int:event_id>/<str:event_slug>/',
         views.detail,
         name="detail"),
