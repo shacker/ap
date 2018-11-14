@@ -6,21 +6,21 @@
 
         {% if items.has_previous %}
           <li class="page-item">
-            <a class="page-link" href="?page={{ items.previous_page_number }}" tabindex="-1">Previous</a>
+            <a class="page-link" href="?page={{ items.previous_page_number }}&q={{ q }}" tabindex="-1">Previous</a>
           </li>
         {% endif %}
 
           {% if items.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page={{ items.number|add:"-1" }}">{{ items.number|add:"-1" }}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ items.number|add:"-1" }}&q={{ q }}">{{ items.number|add:"-1" }}</a></li>
           {% endif %}
-          <li class="page-item active"><a class="page-link disabled" href="?page={{ items.number }}">{{ items.number }}</a></li>
+          <li class="page-item active"><a class="page-link disabled" href="?page={{ items.number }}&q={{ q }}">{{ items.number }}</a></li>
           {% if items.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ items.number|add:"1" }}">{{ items.number|add:"1" }}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ items.number|add:"1" }}&q={{ q }}">{{ items.number|add:"1" }}</a></li>
           {% endif %}
 
         {% if items.has_next %}
           <li class="page-item">
-            <a class="page-link" href="?page={{ items.next_page_number }}" tabindex="-1">Next</a>
+            <a class="page-link" href="?page={{ items.next_page_number }}&q={{ q }}" tabindex="-1">Next</a>
           </li>
         {% endif %}
 

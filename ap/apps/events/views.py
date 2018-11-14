@@ -44,7 +44,10 @@ def search(request):
     if q:
         qs = Event.objects.filter(
             Q(name__icontains=q) |
-            Q(about__icontains=q)).order_by("-start")
+            Q(about__icontains=q) |
+            Q(place_name__icontains=q) |
+            Q(city__icontains=q)
+        ).order_by("-start")
     else:
         # q = None
         qs = Event.objects.none()
