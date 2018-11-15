@@ -7,6 +7,11 @@ app_name = 'users'
 urlpatterns = [
 
     path(
+        'search/',
+        views.search,
+        name="search"),
+
+    path(
         '',
         view=views.users_list,
         name='list'

@@ -1,0 +1,20 @@
+  <header class="masthead events text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">Find Athletes</h1>
+
+          <form action="{% url 'users:search' %}" method="GET">
+            <div class="input-group w-50 mx-auto">
+              <input type="text" class="form-control" name="q" id="q" placeholder="Search..." value="{{ q }}">
+              <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit"><span class="fa fa-search"></span></button>
+              </span>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </header>

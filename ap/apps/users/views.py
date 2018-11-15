@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.db.models import Q
 
 from ap.apps.users.forms import ProfileForm
 from ap.apps.users.models import User
@@ -49,3 +50,27 @@ def edit_profile(request: HttpRequest) -> HttpResponse:
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'users/profile_edit.html', {"form": form}, )
+
+
+def search(request):
+    """Display results of search for Athletes (users)
+    """
+
+    q = request.GET.get("q") if request.GET.get("q") else None
+
+    if q:
+        qs = User.objects.filter(
+            Q(first_name__icontains=q) |
+            Q(last_name__icontains=q) |
+            Q(username__icontains=q) |
+            Q(about__icontains=q)
+        ).order_by("username")
+    else:
+        qs = User.objects.none()
+
+    paginator = Paginator(qs, 10)
+    page = request.GET.get("page")
+    items = paginator.get_page(page)
+
+    context = {"items": items, "q": request.GET.get("q")}
+    return render(request, "users/search.html", context)

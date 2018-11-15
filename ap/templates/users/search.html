@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load static %}
+
+{% block page_title %}Event Search Results{% endblock page_title %}
+
+{% block content %}
+
+  {% include 'users/_masthead_search.html' %}
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="mt-4">
+          Search Results for: {{ q }}
+        </h1>
+
+        {% if items %}
+          {% for item in items %}
+            <div class="card mb-3">
+              <h5 class="card-header">
+                <a href="{% url 'users:profile' item.username %}">{{ item.get_full_name }}</a>
+              </h5>
+              <div class="card-body">
+                <h5 class="card-title">
+                  {# Show user's state or country or both #}
+                  {% if item.state_province or item.country %}
+
+                    {% if item.state_province %}
+                      {{ item.state_province }}
+                    {% endif %}
+
+                    {% if item.country %}
+                      {% if item.state_province %}, {% endif %}{{ item.get_country_display }}
+                    {% endif %}
+
+                  {% endif %}
+
+                </h5>
+                <div class="card-text">
+                  {% comment '' %}
+                  {% if item.about %}
+                    {{ item.about|safe }}
+                  {% else %}
+                    {{ item.about|truncatewords:20|safe }}
+                  {% endif %}
+                  {% endcomment %}
+
+
+                  <div class="row">
+                    <div class="col-lg-2">
+                      {% if item.avatar %}
+                        <a href="{% url 'users:profile' item.username %}">
+                          {% thumbnail item.avatar.file "150x150" crop="center" as im %}
+                            <img
+                              src="{{ im.url }}"
+                              width="{{ im.width }}" height="{{ im.height }}"
+                              alt="{{ item.username }}'s profile image"
+                            />
+                          {% endthumbnail %}
+                        </a>
+                      {% else %}
+                        <a href="{% url 'users:profile' item.username %}">
+                          <img
+                            src="{% static 'img/default_profile_200x200.png' %}"
+                            width="150" height="150"
+                            alt="Default profile image"
+                          />
+                        </a>
+                      {% endif %}
+                    </div>
+
+                    <div class="col-lg-10">
+
+                      {% if item.about %}
+                        <div class="profile_label">
+                          About {{ item.username }}
+                        </div>
+                        <p>
+                          {{ item.about|truncatewords:80|safe }}
+                        </p>
+                      {% endif %}
+                    </div>
+
+        </div>
+
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+        {% else %}
+          <p>No results found, sorry.</p>
+        {% endif %}
+
+        {% include 'core/_pagination.html' %}
+
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
