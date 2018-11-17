@@ -45,6 +45,13 @@ header.masthead {
     padding-bottom: 8rem;
   }
 
+
+  header.masthead.contact {
+    background: url("../img/bg-contact.jpg") no-repeat center center;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
   @media (min-width: 768px) {
     header.masthead {
       padding-top: 12rem;

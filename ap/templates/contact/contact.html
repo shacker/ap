@@ -9,14 +9,23 @@
 {% endblock extra_head %}
 
 {% block content %}
+
+  {% include 'contact/_masthead_contact.html' %}
+
   <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="mt-4">
+          Contact Us
+        </h1>
 
-    <h1>Contact Us</h1>
+        <p>We'd love to hear from you.</p>
 
-    <p>We'd love to hear from you.</p>
+        {% crispy form %}
 
-    {% crispy form %}
-
+      </div>
+    </div>
   </div>
 
-{% endblock %}
+{% endblock content %}
+
