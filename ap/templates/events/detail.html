@@ -34,6 +34,12 @@
       {{ event.name }}
     </h1>
 
+    {% if event in user.event_set.all %}
+      <p>
+        <a href="{% url 'events:organize_event' event.id event.slug %}" class="btn btn-sm btn-primary">Manage Event</a>
+      </p>
+    {% endif %}
+
     <div class="media mb-4 mt-4">
       <div class="media-left media-middle">
         {% with 'img/icons/'|add:event.event_type|add:".png" as iconfilepath  %}

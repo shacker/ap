@@ -12,9 +12,21 @@ urlpatterns = [
         name="search"),
 
     path(
+        '<int:event_id>/<str:event_slug>/organize/',
+        views.organize_event,
+        name="organize_event"),
+
+    path(
         '<int:event_id>/<str:event_slug>/',
         views.detail,
         name="detail"),
+
+    path(
+        'organize/',
+        views.index,
+        {'organize': True},
+        name="organizers_index"
+    ),
 
     path(
         '<str:tense>/',

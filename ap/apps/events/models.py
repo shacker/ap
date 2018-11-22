@@ -68,8 +68,9 @@ class Organization(TimeStampedModel):
 class Event(TimeStampedModel):
     """Data definition for an athletic Event."""
 
-    name = models.CharField(
-        max_length=140
+    title = models.CharField(
+        max_length=140,
+        verbose_name="Event Title"
     )
 
     slug = AutoSlugField(
@@ -156,11 +157,10 @@ class Event(TimeStampedModel):
         help_text="Site title for primary Event page elsewhere on the internet."
     )
 
-    humans = models.ManyToManyField(
+    organizers = models.ManyToManyField(
         User,
         blank=True,
-        verbose_name="Human Contact",
-        help_text="Another user on athlete.photo functioning as a contact for this event."
+        help_text="Other users on athlete.photo functioning as organizers for this event."
     )
 
     organizations = models.ManyToManyField(
@@ -202,7 +202,7 @@ class Event(TimeStampedModel):
 
     def __str__(self):
         """Unicode representation of Event."""
-        return self.name
+        return self.title
 
 
 class Route(TimeStampedModel):

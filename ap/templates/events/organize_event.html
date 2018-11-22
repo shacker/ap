@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}Manage events{% endblock page_title %}
+
+{% block content %}
+
+  <header class="masthead events text-white text-center mb-4">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">Manage events</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <h3>
+      Edit/Manage Event: {{ event.title }}, {{ event.start|date:"M j, Y" }}
+    </h3>
+
+    <form action="" method="post">
+      {{form|crispy}}
+    </form>
+
+  </div>
+{% endblock content %}
+
+

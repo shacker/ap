@@ -6,15 +6,27 @@
 
   {% include 'events/_masthead_search.html' %}
 
-
   <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <h1 class="mt-4">
-            {% if tense == "past" %}Past{% else %}Upcoming{% endif %} Events
+            {% if not organize %}
+              {% if tense == "past" %}Past{% else %}Upcoming{% endif %} Events
+              <p>
+                <a href="{% url 'events:organizers_index' %}" class="btn btn-sm btn-primary">Manage Events</a>
+              </p>
+            {% else %}
+              Manage Events
+            {% endif %}
           </h1>
+
           <table class="table">
             <tr>
+              {% if organize %}
+                <th>
+                  Manage
+                </th>
+              {% endif %}
               <th>
                 Date
               </th>
@@ -30,6 +42,11 @@
             </tr>
           {% for event in events_list %}
             <tr>
+              {% if organize %}
+                <td>
+                  <a href="{% url 'events:organize_event' event.id event.slug %}" class="btn btn-sm btn-primary">Manage</a>
+                </td>
+              {% endif %}
               <td>
                 {{ event.start|date:"M j, Y" }}
               </td>
@@ -46,10 +63,12 @@
           {% endfor %}
           </table>
 
-          {% if tense == "past" %}
-            <a class="btn btn-primary" href="{% url 'events:index' %}">See Upcoming Events</a>
-          {% else %}
-            <a class="btn btn-primary" href="{% url 'events:index' tense='past' %}">See Past Events</a>
+          {% if not organize %}
+            {% if tense == "past" %}
+              <a class="btn btn-primary" href="{% url 'events:index' %}">See Upcoming Events</a>
+            {% else %}
+              <a class="btn btn-primary" href="{% url 'events:index' tense='past' %}">See Past Events</a>
+            {% endif %}
           {% endif %}
 
           {% include 'core/_pagination.html' with items=events_list %}

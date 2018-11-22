@@ -30,6 +30,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     personal_website = factory.Faker('url')
     professional_website = factory.Faker('url')
 
+
     @factory.post_generation
     def maybe_add_groups(obj, build: bool, extracted: Any, **kwargs: dict) -> None:
         # Maybe assign a random role to generated user.
@@ -37,6 +38,7 @@ class UserFactory(factory.django.DjangoModelFactory):
         if dice == 3:  # 1 in 5 chance we make this user a photographer or organizer
             group = Group.objects.all().order_by('?').first()
             obj.groups.add(group)
+
 
     @classmethod
     def _create(cls, model_class, *args, **kwargs):

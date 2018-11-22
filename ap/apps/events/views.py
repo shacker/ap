@@ -5,26 +5,36 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 
+from ap.apps.events.forms import EventManagementForm
 from ap.apps.events.models import Event
 
 
-def index(request, tense: str = None):
-    """List/search all events"""
+def index(request, tense: str = None, organize: bool = False):
+    """List/search all events. Distinguish between past and upcoming events.
+    If organize == True, filter by events current user is allowed to manage."""
 
     today = datetime.date.today()
-    events = Event.objects.filter(published=True)
-    if tense == "past":
-        events = events.filter(start__lte=today)
-        events = events.order_by("-start")
+
+    if organize:
+        events = request.user.event_set.all().order_by("-start")
     else:
-        events = events.filter(start__gte=today)
-        events = events.order_by("start")
+        events = Event.objects.filter(published=True)
+        if tense == "past":
+            events = events.filter(start__lte=today).order_by("-start")
+        else:
+            events = events.filter(start__gte=today).order_by("start")
 
     paginator = Paginator(events, 10)  # num per page
     page = request.GET.get("page")
     events_list = paginator.get_page(page)
 
-    return render(request, "events/index.html", {"events_list": events_list, "tense": tense})
+    ctx = {
+        "events_list": events_list,
+        "tense": tense,
+        "organize": organize
+    }
+
+    return render(request, "events/index.html", ctx)
 
 
 def detail(request, event_id: int, event_slug: str = None):
@@ -35,6 +45,15 @@ def detail(request, event_id: int, event_slug: str = None):
     return render(request, "events/detail.html", {"event": event, "google_api_key": settings.GOOGLE_API_KEY})
 
 
+def organize_event(request, event_id: int, event_slug: str = None):
+    """Event organizer controls settings for an event"""
+
+    event = get_object_or_404(Event, id=event_id)
+    form = EventManagementForm(instance=event)
+
+    return render(request, "events/organize_event.html", {"event": event, "form": form})
+
+
 def search(request):
     """Display results of search for Event records.
     """
@@ -43,7 +62,7 @@ def search(request):
 
     if q:
         qs = Event.objects.filter(
-            Q(name__icontains=q) |
+            Q(title__icontains=q) |
             Q(about__icontains=q) |
             Q(place_name__icontains=q) |
             Q(city__icontains=q)
