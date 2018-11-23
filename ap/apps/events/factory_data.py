@@ -19,6 +19,7 @@ RANDOM_EVENT_LIST = [
     'Spinx Run Fest',
     'Best of the Bay Double Century',
     'Grizzly Century',
+    'Grizzly Peak Century',
     'The Jensie Gran Fondo of Marin',
     'Konocti Challenge',
     'Westlake Village Century',

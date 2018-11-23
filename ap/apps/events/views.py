@@ -51,7 +51,12 @@ def organize_event(request, event_id: int, event_slug: str = None):
     event = get_object_or_404(Event, id=event_id)
     form = EventManagementForm(instance=event)
 
-    return render(request, "events/organize_event.html", {"event": event, "form": form})
+    ctx = {
+        "event": event,
+        "form": form,
+        "google_api_key": settings.GOOGLE_API_KEY
+    }
+    return render(request, "events/organize_event.html", ctx)
 
 
 def search(request):
