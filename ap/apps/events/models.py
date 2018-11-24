@@ -144,6 +144,11 @@ class Event(TimeStampedModel):
         help_text="For map display"
     )
 
+    zoom = models.SmallIntegerField(
+        default=12,
+        help_text="Zoom level for map display"
+    )
+
     official_event_site_url = models.URLField(
         blank=True,
         null=True,

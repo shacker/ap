@@ -1,8 +1,5 @@
 from django import forms
 
-# from crispy_forms.helper import FormHelper
-# from crispy_forms.layout import Submit
-
 from ap.apps.events.models import Event
 
 
@@ -22,6 +19,7 @@ class EventManagementForm(forms.ModelForm):
             'address',
             'latitude',
             'longitude',
+            'zoom',
             'official_event_site_title',
             'official_event_site_url',
             'organizers',
