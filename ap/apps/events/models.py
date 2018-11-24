@@ -89,6 +89,7 @@ class Event(TimeStampedModel):
     )
 
     start = models.DateTimeField(
+        verbose_name="Start Date and Time",
         auto_now=False,
         auto_now_add=False,
         blank=True,
@@ -97,6 +98,7 @@ class Event(TimeStampedModel):
     )
 
     place_name = models.CharField(
+        verbose_name="Start Place Name",
         max_length=100,
         blank=True,
         help_text="Name of the site, building, or area where event begins."
@@ -122,6 +124,7 @@ class Event(TimeStampedModel):
         choices=COUNTRY_CHOICES)
 
     address = models.CharField(
+        verbose_name="Start Place Address",
         max_length=255,
         blank=True,
         null=True,
@@ -150,6 +153,7 @@ class Event(TimeStampedModel):
     )
 
     official_event_site_url = models.URLField(
+        verbose_name="External Event Website URL",
         blank=True,
         null=True,
         max_length=200,
@@ -157,9 +161,10 @@ class Event(TimeStampedModel):
     )
 
     official_event_site_title = models.CharField(
+        verbose_name="External Event Website Title",
         blank=True,
         max_length=200,
-        help_text="Site title for primary Event page. Will be linked to Official Event Site URL."
+        help_text="Site title for primary Event page. Will be linked to External Event Website URL."
     )
 
     organizers = models.ManyToManyField(
@@ -171,7 +176,7 @@ class Event(TimeStampedModel):
     organizations = models.ManyToManyField(
         Organization,
         blank=True,
-        help_text="One or more organizations that sponsor or support this event."
+        help_text="One or more organizations that sponsor or support this event"
     )
 
     fee = models.DecimalField(
@@ -194,7 +199,7 @@ class Event(TimeStampedModel):
 
     published = models.BooleanField(
         default=False,
-        help_text="Ready for public display (defaults to False)"
+        help_text="Unpublished events are hidden from public display."
     )
 
     objects = models.Manager()

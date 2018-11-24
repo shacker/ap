@@ -22,7 +22,4 @@ class EventManagementForm(forms.ModelForm):
             'zoom',
             'official_event_site_title',
             'official_event_site_url',
-            'organizers',
-            'organizations',
-            'published',
         ]

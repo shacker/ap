@@ -33,12 +33,90 @@
     </h3>
 
     <form action="" method="post">
-      {{ form|crispy }}
+      <div class="row">
+        <div class="col">
+          {{ form.title|as_crispy_field }}
+        </div>
+        <div class="col">
+          {{ form.event_type|as_crispy_field }}
+        </div>
+       </div>
 
-      <p>
-        <b>Center this map on the event meeting place with desired zoom level. Map will appear to users as you set it here.</b><br />
-        <div id="map"></div>
-      </p>
+    <form action="" method="post">
+      <div class="row">
+        <div class="col">
+          {{ form.start|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          {{ form.official_event_site_url|as_crispy_field }}
+        </div>
+        <div class="col">
+          {{ form.official_event_site_title|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          {{ form.about|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          {{ form.place_name|as_crispy_field }}
+        </div>
+        <div class="col">
+          {{ form.address|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          {{ form.city|as_crispy_field }}
+        </div>
+        <div class="col">
+          {{ form.state_province|as_crispy_field }}
+        </div>
+       </div>
+
+      <div class="row">
+        <div class="col">
+          {{ form.country|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          {{ form.latitude|as_crispy_field }}
+        </div>
+        <div class="col">
+          {{ form.longitude|as_crispy_field }}
+        </div>
+        <div class="col">
+          {{ form.zoom|as_crispy_field }}
+        </div>
+      </div>
+
+      {# Non-form map element writes results to hidden lat/long/zoom form fields #}
+      <div class="row">
+        <div class="col">
+          <p>
+            <b>Center map on the event meeting place with desired zoom level.
+            Map will appear to users as seen here.</b>
+          </p>
+          <div id="map"></div>
+        </div>
+
+      </div>
+
+
+
+
+
+
     </form>
 
   </div>
@@ -51,7 +129,7 @@
 
     gMap = new google.maps.Map(document.getElementById('map'));
 
-    {# Does event have an existing location? If so, use it; otherwise set one. #}
+    {# Does event have existing coords? If so, use them; otherwise set them. #}
     {% if event.latitude and event.longitude %}
 
       var marker = new google.maps.LatLng( {{ event.latitude }}, {{ event.longitude }} );
