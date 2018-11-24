@@ -157,7 +157,7 @@ class Event(TimeStampedModel):
         blank=True,
         null=True,
         max_length=200,
-        help_text="URL for primary Event page (can be elsewhere on the internet)"
+        help_text="URL for primary Event page elsewhere on the internet"
     )
 
     official_event_site_title = models.CharField(
