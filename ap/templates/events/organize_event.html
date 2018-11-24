@@ -36,7 +36,7 @@
       {{ form|crispy }}
 
       <p>
-        <b>Center this map on the event meeting place:</b><br />
+        <b>Center this map on the event meeting place with desired zoom level. Map will appear to users as you set it here.</b><br />
         <div id="map"></div>
       </p>
     </form>
@@ -51,17 +51,29 @@
 
   gMap = new google.maps.Map(document.getElementById('map'));
 
-  navigator.geolocation.getCurrentPosition(function(position) {
-    // Center on user's current location if geolocation prompt allowed
-    var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  {# Does this event have an existing location? If so, use it; otherwise set one. #}
+  {% if event.latitude and event.longitude %}
+
+    var initialLocation = new google.maps.LatLng( {{ event.latitude }}, {{ event.longitude }} );
     gMap.setCenter(initialLocation);
     gMap.setZoom(13);
-  }, function(positionError) {
-    // User denied geolocation prompt - default to Chicago
-    gMap.setCenter(new google.maps.LatLng(39.8097343, -98.5556199));
-    gMap.setZoom(5);
-  });
-}
+
+  {% else %}
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      // Center on user's current location if geolocation prompt allowed
+      console.log("have")
+      var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      gMap.setCenter(initialLocation);
+      gMap.setZoom(13);
+    }, function(positionError) {
+      console.log("dont have")
+      // User denied geolocation prompt - default to Chicago
+      gMap.setCenter(new google.maps.LatLng(39.8097343, -98.5556199));
+      gMap.setZoom(5);
+    });
+  {% endif %}
+  }
 </script>
   <script
     async
