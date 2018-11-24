@@ -1,9 +1,10 @@
 import datetime
 
 from django.conf import settings
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 
 from ap.apps.events.forms import EventManagementForm
 from ap.apps.events.models import Event
@@ -49,7 +50,18 @@ def organize_event(request, event_id: int, event_slug: str = None):
     """Event organizer controls settings for an event"""
 
     event = get_object_or_404(Event, id=event_id)
-    form = EventManagementForm(instance=event)
+
+    if request.method == 'POST':
+        form = EventManagementForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Event saved successfully: {event.title}")
+            return redirect(reverse('events:organizers_index'))
+        else:
+            print(form.errors)
+
+    else:
+        form = EventManagementForm(instance=event)
 
     ctx = {
         "event": event,

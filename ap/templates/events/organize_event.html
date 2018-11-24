@@ -29,10 +29,11 @@
   <div class="container">
 
     <h3>
-      Edit/Manage Event: {{ event.title }}, {{ event.start|date:"M j, Y" }}
+      Edit Event: {{ event.title }}, {{ event.start|date:"M j, Y" }}
     </h3>
 
     <form action="" method="post">
+      {% csrf_token %}
       <div class="row">
         <div class="col">
           {{ form.title|as_crispy_field }}
@@ -88,33 +89,27 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col">
-          {{ form.latitude|as_crispy_field }}
-        </div>
-        <div class="col">
-          {{ form.longitude|as_crispy_field }}
-        </div>
-        <div class="col">
-          {{ form.zoom|as_crispy_field }}
-        </div>
-      </div>
+      {# Hidden fields capture results of map changes for saving to DB #}
+      <input type="hidden" name="latitude" value="{{ form.latitude.value }}" step="1e-12" class="numberinput form-control" id="id_latitude">
+      <input type="hidden" name="longitude" value="{{ form.longitude.value }}" step="1e-12" class="numberinput form-control" id="id_longitude">
+      <input type="hidden" name="zoom" value="{{ form.zoom.value }}" class="numberinput form-control" required="" id="id_zoom">
 
       {# Non-form map element writes results to hidden lat/long/zoom form fields #}
       <div class="row">
         <div class="col">
           <p>
-            <b>Center map on the event meeting place with desired zoom level.
+            <b>Center map on the event meeting place.
             Map will appear to users as seen here.</b>
           </p>
           <div id="map"></div>
         </div>
-
       </div>
 
-
-
-
+      <div class="row mt-4 mb-4">
+        <div class="col">
+          <button class="btn btn-primary" type="submit">Save Changes</button>
+        </div>
+      </div>
 
 
     </form>
