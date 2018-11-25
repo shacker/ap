@@ -169,6 +169,7 @@ class Event(TimeStampedModel):
 
     organizers = models.ManyToManyField(
         User,
+        limit_choices_to={'groups__name': 'Organizers'},
         blank=True,
         related_name='event_organizers',
         help_text="Other users on athlete.photo functioning as organizers for this event."
