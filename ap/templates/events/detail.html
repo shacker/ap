@@ -95,24 +95,23 @@
       </ul>
     </p>
 
-
     <p>
-      <b>Supporting Organizations:</b>
+      <b>Photographer{{ event.photographers.all|pluralize }}:</b>
       <ul>
-      {% for org in event.organizations.all %}
+      {% for photographer in event.photographers.all %}
         <li>
-          {{ org }}
+          <a href="{% url 'users:profile' photographer.username %}">{{ photographer.get_full_name }}</a>
         </li>
       {% endfor %}
       </ul>
     </p>
 
     <p>
-      <b>Human Contact{{ event.humans.all.count|pluralize }}:</b><br />
+      <b>Organizer{{ event.organizers.all.count|pluralize }}:</b>
       <ul>
-      {% for human in event.humans.all %}
+      {% for person in event.organizers.all %}
         <li>
-          <a href="{% url 'users:profile' human.username %}">{{ human.get_full_name }} (TITLE)</a>
+          <a href="{% url 'users:profile' person.username %}">{{ person.get_full_name }} (TITLE)</a>
         </li>
       {% endfor %}
       </ul>

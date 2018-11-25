@@ -16,7 +16,7 @@ class OrgAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     list_display = ['title', 'event_type', 'start', 'fee_paid']
     inlines = [RouteInline, ]
-    filter_horizontal = ['organizations', 'organizers']
+    filter_horizontal = ['organizations', 'organizers', 'photographers']
 
 
 admin.site.register(Event, EventAdmin)
