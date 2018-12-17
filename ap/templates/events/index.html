@@ -12,9 +12,11 @@
           <h1 class="mt-4">
             {% if not organize %}
               {% if tense == "past" %}Past{% else %}Upcoming{% endif %} Events
-              <p>
-                <a href="{% url 'events:organizers_index' %}" class="btn btn-sm btn-primary">Manage Events</a>
-              </p>
+              {% if user.is_authenticated %}
+                <p>
+                  <a href="{% url 'events:organizers_index' %}" class="btn btn-sm btn-primary">Manage Events</a>
+                </p>
+              {% endif %}
             {% else %}
               Manage Events
             {% endif %}

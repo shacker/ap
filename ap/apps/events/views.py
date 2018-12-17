@@ -2,6 +2,7 @@ import datetime
 
 from django.conf import settings
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render, reverse
@@ -9,6 +10,7 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 from ap.apps.events.forms import EventManagementForm
 from ap.apps.events.models import Event
 
+from icecream import ic
 
 def index(request, tense: str = None, organize: bool = False):
     """List/search all events. Distinguish between past and upcoming events.
@@ -17,7 +19,10 @@ def index(request, tense: str = None, organize: bool = False):
     today = datetime.date.today()
 
     if organize:
-        events = request.user.event_set.all().order_by("-start")
+        if request.user.is_authenticated:
+            events = request.user.organizer_to_events.all().order_by("-start")
+        else:
+            raise PermissionDenied
     else:
         events = Event.objects.filter(published=True)
         if tense == "past":
@@ -54,11 +59,15 @@ def organize_event(request, event_id: int, event_slug: str = None):
     if request.method == 'POST':
         form = EventManagementForm(request.POST, instance=event)
         if form.is_valid():
+            ic(form.cleaned_data['start'])
+            ic(form.errors)
             form.save()
+            # import pdb; pdb.set_trace()
             messages.success(request, f"Event saved successfully: {event.title}")
             return redirect(reverse('events:organizers_index'))
         else:
-            print(form.errors)
+            ic(form.cleaned_data['start'])
+            ic(form.data['start'])  # problem field
 
     else:
         form = EventManagementForm(instance=event)
